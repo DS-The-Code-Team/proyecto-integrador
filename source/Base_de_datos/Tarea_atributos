@@ -1,6 +1,16 @@
 Entidad 1: Acciones.
   Atributos:
-  
+  Simbolo_empresa
+  Nombre_empresa
+  Cant_compra_diaria
+  Precio_compra_actual
+  Precio_venta_actual
+  Cant_venta_diaria
+  Apertura
+  Min_diario
+  Max_diario
+  Ultimo_cierre
+
 Entidad 2: Inversor.
   Atributos:
   Saldo_invertido
@@ -12,3 +22,7 @@ Entidad 3: Broker.
   Atributos:
   Comision_compra
   Comision_venta
+
+Entidad 4: Mercado.
+  Atributos:
+  Precio_mercado
