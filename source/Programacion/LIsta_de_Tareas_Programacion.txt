@@ -1,5 +1,7 @@
-- Identificar clases 
-- Crear clases
-- Establecer relaciones
-- Realizar diagrama de clases
-- Documentar diagrama
+**Lista de tareas de programación**
+
+1 - Identificar clases 
+2 - Crear clases
+3 - Establecer relaciones
+4 - Realizar diagrama de clases
+5 - Documentar diagrama
