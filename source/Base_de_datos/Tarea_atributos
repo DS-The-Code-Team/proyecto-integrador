@@ -11,18 +11,35 @@ Entidad 1: Acciones.
   Max_diario
   Ultimo_cierre
 
-Entidad 2: Inversor.
+Entidad 2: Empresa.
+  Atributos:
+  Simbolo_empresa
+  Nombre_empresa
+
+Entidad 3: Inversor.
   Atributos:
   Saldo_invertido
   Saldo_cuenta
   Cantidad_acciones_compradas
   Valor_comprometido
+  Tiempo_inversion
+  Perfil_inversor
 
-Entidad 3: Broker.
+Entidad 4: Broker.
   Atributos:
   Comision_compra
   Comision_venta
 
-Entidad 4: Mercado.
+Entidad 5: Mercado.
   Atributos:
   Precio_mercado
+
+Entidad 6: Compras.
+  Atributos: 
+  Cant_compra_diaria
+  Precio_compra_actual
+
+Entidad 7: Ventas.
+  Atributos:  
+  Precio_venta_actual
+  Cant_venta_diaria
