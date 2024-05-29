@@ -1,1 +1,14 @@
+Entidad 1: Acciones.
+  Atributos:
+  
+Entidad 2: Inversor.
+  Atributos:
+  Saldo_invertido
+  Saldo_cuenta
+  Cantidad_acciones_compradas
+  Valor_comprometido
 
+Entidad 3: Broker.
+  Atributos:
+  Comision_compra
+  Comision_venta
