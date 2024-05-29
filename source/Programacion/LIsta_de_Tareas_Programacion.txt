@@ -1,0 +1,5 @@
+- Identificar clases 
+- Crear clases
+- Establecer relaciones
+- Realizar diagrama de clases
+- Documentar diagrama
