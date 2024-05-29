@@ -1,6 +1,7 @@
 Entidad 1: Acciones.
   Atributos:
   Simbolo_empresa
+  Ultimo_operado
   Nombre_empresa
   Cant_compra_diaria
   Precio_compra_actual
@@ -10,6 +11,7 @@ Entidad 1: Acciones.
   Min_diario
   Max_diario
   Ultimo_cierre
+  Rentabilidad
 
 Entidad 2: Empresa.
   Atributos:
