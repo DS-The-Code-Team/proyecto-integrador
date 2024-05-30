@@ -45,6 +45,9 @@ Entidad 3: Inversor.
 
 Entidad 4: Broker.
   Atributos:
+  (id_broker)
+  (id_compras)
+  (id_ventas)
   (Comision_compra)
   (Comision_venta)
 
