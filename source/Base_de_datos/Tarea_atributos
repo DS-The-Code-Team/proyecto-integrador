@@ -13,10 +13,21 @@ Entidad 1: Acciones.
   Ultimo_cierre
   Rentabilidad
 
+  (id_accion)
+  (id_empresa)
+  (apertura)
+  (ultimo_cierre)
+  
+
 Entidad 2: Empresa.
   Atributos:
   Simbolo_empresa
   Nombre_empresa
+
+  (id_empresa)
+  (simbolo)
+  (nombre_empresa)
+  
 
 Entidad 3: Inversor.
   Atributos:
@@ -27,21 +38,47 @@ Entidad 3: Inversor.
   Tiempo_inversion
   Perfil_inversor
 
+  (id_inversor)
+  (id_cuenta)
+  (tiempo_inversion)
+  (perfil_inversor)
+
 Entidad 4: Broker.
   Atributos:
-  Comision_compra
-  Comision_venta
+  (Comision_compra)
+  (Comision_venta)
 
 Entidad 5: Mercado.
   Atributos:
-  Precio_mercado
+  (Precio_mercado)
+  (id_accion)
+  (id_inversor)
 
 Entidad 6: Compras.
-  Atributos: 
-  Cant_compra_diaria
-  Precio_compra_actual
+  Atributos:
+  (id_compras)
+  (Cant_compra_diaria)
+  (Precio_compra_actual)
 
 Entidad 7: Ventas.
   Atributos:  
-  Precio_venta_actual
-  Cant_venta_diaria
+  (id_ventas)
+  (Precio_venta_actual)
+  (Cant_venta_diaria)
+
+Entidad 8: Operaciones diarias.
+  Atributos:
+  (id_operacion)
+  (id_accion)
+  (id_compras)
+  (id_ventas)
+  (min_diario)
+  (max_diario)
+  (ultimo_operado)
+
+Entidad 9: Cuentas
+  Atributos:
+  (Id_cuenta)
+  (Saldo_invertido)
+  (Saldo_cuenta)
+
