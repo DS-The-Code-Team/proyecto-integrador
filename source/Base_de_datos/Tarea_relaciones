@@ -1,1 +1,8 @@
-
+Relacion 1: Empresa posee acciones.
+Relacion 2: Acciones operan en Mercado.
+Relacion 3: Inversor invierte en Acciones.
+Relacion 4: Inversor realiza operaciones diarias.
+Relacion 5: Broker realiza compras.
+Relacion 6: Broker realiza ventas.
+Relacion 7: Inversor posee cuentas.
+Relacion 8: Inversor contrata Brocker.
