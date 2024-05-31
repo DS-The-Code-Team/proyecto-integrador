@@ -1,7 +1,7 @@
 Entidad 1: Usuario/Inversor
   ID_Usuario (PK)
   Nombre
-	Saldo_Inicial
+  Saldo_Inicial
 
 Entidad 2: Empresa
   ID_Empresa (PK)
