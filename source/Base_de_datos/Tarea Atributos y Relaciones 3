@@ -1,5 +1,6 @@
 Usuario/Inversor:
 ID_Usuario (clave primaria)
+ID_Portafolio (clave foránea)
 Nombre
 Saldo_Inicial
 Saldo_Actual
@@ -10,6 +11,7 @@ Fecha de Registro
 
 Acciones:
 ID_Accion (clave primaria)
+ID_Cotizacion (clave foránea)
 Símbolo
 Nombre_Empresa
 Precio_Compra
