@@ -1,0 +1,27 @@
+Entidad 1: Usuario/Inversor
+  ID_Usuario (PK)
+  Nombre
+	Saldo_Inicial
+
+Entidad 2: Empresa
+  ID_Empresa (PK)
+  Nombre
+  Símbolo
+
+Entidad 3: Acciones
+  ID_Acción (PK)
+  ID_Empresa (FK)
+  Precio_Compra_Actual
+  Precio_Venta_Actual
+  Cantidad_Compra_Diaria
+  Cantidad_Venta_Diaria
+  Apertura
+  Mínimo_Diario
+  Máximo_Diario
+  Último_Cierre
+
+Entidad 4: Cotización
+  ID_Cotización (PK)
+  ID_Acción (FK)
+  Último_Operado
+  Fecha
