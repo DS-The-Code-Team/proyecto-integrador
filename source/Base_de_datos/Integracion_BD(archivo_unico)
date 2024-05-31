@@ -1,3 +1,9 @@
+Entidades:
+Usuario/Inversor
+Acciones
+Cotizaciones
+Transacciones
+Portafolio
 
 Usuario/Inversor:
 ID_Usuario (clave primaria)
