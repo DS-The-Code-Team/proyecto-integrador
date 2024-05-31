@@ -1,1 +1,72 @@
 
+Usuario/Inversor:
+ID_Usuario (clave primaria)
+ID_Portafolio (clave foránea)
+Nombre
+Saldo_Inicial
+Saldo_Actual
+Email
+Contraseña
+Tipo de Usuario (por ejemplo, cliente, empleado)
+Fecha de Registro
+
+Acciones:
+ID_Accion (clave primaria)
+ID_Cotizacion (clave foránea)
+Símbolo
+Nombre_Empresa
+Precio_Compra
+Precio_Venta
+Cantidad_Disponible
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+
+Cotizaciones:
+ID_Cotizacion (clave primaria)
+ID_Accion (clave foránea)
+Último_Operado
+Cantidad_Compra_Diaria
+Precio_Compra_Actual
+Precio_Venta_Actual
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+Fecha_Cotizacion
+
+Transacciones:
+ID_Transaccion (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
+Tipo_Transaccion (compra/venta)
+Cantidad
+Precio
+Comisión_Broker
+Fecha_Transaccion
+
+Portafolio:
+ID_Portafolio (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
+Cantidad_Acciones
+Valor_Comprometido
+Ganancia_Perdida
+Saldo_Cuenta_Demo
+
+Usuario/Inversor - Transacciones:
+Un usuario puede realizar varias transacciones de compra y venta de acciones.
+Relación uno a muchos: Un usuario puede tener múltiples transacciones, pero una transacción pertenece a un único usuario.
+
+Acciones - Cotizaciones:
+Cada acción tiene múltiples cotizaciones a lo largo del tiempo.
+Relación uno a muchos: Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
+
+Usuario/Inversor - Portafolio:
+Cada usuario tiene un portafolio que muestra las acciones que posee.
+Relación uno a muchos: Un usuario puede tener múltiples entradas en su portafolio, pero cada entrada pertenece a un único usuario.
+
+Acciones - Transacciones:
+Las transacciones de compra y venta están relacionadas con las acciones involucradas.
+Relación uno a muchos: Una acción puede estar involucrada en múltiples transacciones, pero cada transacción se refiere a una única acción.
