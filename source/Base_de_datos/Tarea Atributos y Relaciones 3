@@ -1,0 +1,35 @@
+los atributos para cada entidad:
+
+Empleados:
+ID_empleado (PK)
+Nombre
+Apellido
+Cargo
+Fecha de contratación
+
+Clientes:
+ID_cliente (PK)
+Nombre
+Apellido
+Dirección
+Teléfono
+Email
+
+Acciones:
+ID_accion (PK)
+Nombre
+Precio
+Cantidad_disponible
+
+Transacciones:
+ID_transaccion (PK)
+ID_cliente (FK)
+ID_accion (FK)
+Tipo (compra/venta)
+Cantidad
+Fecha
+
+Las relaciones entre las entidades identificadas:
+Empleados y Clientes: Relación uno a muchos (Un empleado puede atender a varios clientes)
+Clientes y Transacciones: Relación uno a muchos (Un cliente puede realizar varias transacciones)
+Acciones y Transacciones: Relación uno a muchos (Una acción puede estar involucrada en varias transacciones)
