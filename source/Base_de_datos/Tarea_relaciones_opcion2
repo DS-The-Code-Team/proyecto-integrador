@@ -1,0 +1,3 @@
+Relacion 1: Usuario/Inversor -> Acción (relación de compra/venta)
+Relacion 2: Empresa -> Acción (relación de pertenencia)
+Relación 3: Acción -> Cotización (relación de histórico de cotizaciones)
