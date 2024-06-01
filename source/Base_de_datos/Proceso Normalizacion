@@ -1,155 +1,84 @@
-- 1: Identificar las dependencias funcionales en las entidades:
+Usuario/Inversor:
 
-Entidad "Usuario/Inversor":
+Mantener la entidad como está, ya que no presenta dependencias transitivas.
+Acciones:
 
-Atributos:
-ID_Usuario (PK)
-Nombre
-Saldo_Inicial
-Saldo_Actual
-Email
-Contraseña
-Tipo de Usuario
-Fecha de Registro
+Dividir la entidad "Acciones" en dos tablas:
 
-Dependencias:
-Nombre
-Saldo_Inicial
-Saldo_Actual
-Email
-Contraseña
-Tipo de Usuario
-Fecha de Registro DEPENDEN DE --> ID_Usuario (PK)
-
-Entidad "Acciones":
-
-Atributos: 
-ID_Accion (PK)
+Acciones:
+ID_Accion (clave primaria)
+ID_Cotizacion (clave foránea)
 Símbolo
 Nombre_Empresa
-Precio_Compra 
-Precio_Venta
-Cantidad_Disponible
-Apertura
-Mínimo_Diario
-Máximo_Diario
-Último_Cierre
 
-Dependencias:
-Símbolo
-Nombre_Empresa
+Detalles_Acciones:
+ID_Cotizacion (clave primaria)
 Precio_Compra
 Precio_Venta
 Cantidad_Disponible
 Apertura
 Mínimo_Diario
 Máximo_Diario
-Último_Cierre DEPENDEN DE --> ID_Accion (PK)
-
-Entidad "Cotizaciones":
-
-Atributos: 
-ID_Cotizacion (PK)
-ID_Accion (FK)
-Último_Operado
-Cantidad_Compra_Diaria
-Precio_Compra_Actual
-Precio_Venta_Actual
-Apertura
-Mínimo_Diario
-Máximo_Diario
 Último_Cierre
-Fecha_Cotizacion
 
-Dependencias:
-Último_Operado
-Cantidad_Compra_Diaria
-Precio_Compra_Actual
-Precio_Venta_Actual
-Apertura
-Mínimo_Diario
-Máximo_Diario
-Último_Cierre
-Fecha_Cotizacion DEPENDEN DE --> ID_Cotizacion (PK)
-ID_Accion DEPENDE DE  ID_Cotizacion (FK)
+Cotizaciones:
+Mantener la entidad como está, ya que no presenta dependencias transitivas.
 
-Entidad "Transacciones":
+Transacciones:
+Mantener la entidad como está, ya que no presenta dependencias transitivas.
 
-Atributos:
-ID_Transaccion (PK)
-ID_Usuario (FK)
-ID_Accion (FK)
-Tipo_Transaccion
-Cantidad
-Precio
-Comisión_Broker
-Fecha_Transaccion
+Portafolio:
+Dividir la entidad "Portafolio" en dos tablas:
 
-Dependencias:
-ID_Usuario
-ID_Accion
-Tipo_Transaccion
-Cantidad
-Precio
-Comisión_Broker
-Fecha_Transaccion DEPENDEN DE --> ID_Transaccion (PK)
-
-Entidad "Portafolio":
-
-Atributos: 
-ID_Portafolio (PK)
-ID_Usuario (FK)
-ID_Accion (FK)
+Portafolio:
+ID_Portafolio (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
 Cantidad_Acciones
 Valor_Comprometido
 Ganancia_Perdida
+
+Saldo_Cuenta_Demo:
+ID_Portafolio (clave primaria)
 Saldo_Cuenta_Demo
 
-Dependencias:
-ID_Usuario
-ID_Accion
-Cantidad_Acciones
-Valor_Comprometido
-Ganancia_Perdida
-Saldo_Cuenta_Demo DEPENDEN DE --> ID_Portafolio (PK)
+Al realizar estas divisiones en nuevas tablas, se eliminan las dependencias transitivas y 
+se logra que cada atributo no clave dependa solo de la clave primaria de la tabla correspondiente o de otros atributos clave,
+cumpliendo así con la Tercera Forma Normal (3FN) 
 
-- 2: Eliminar las dependencias parciales y transitivas:
-
-No se identifican dependencias parciales o transitivas en las entidades mencionadas.
-
-Paso 3: Asegurar que cada atributo no clave dependa de la clave primaria completa:
-
-Los atributos no clave en cada entidad dependen de la clave primaria completa, cumpliendo con la 3FN.
 
 Modelo Relacional Resultante:
 
-Tabla "Usuario/Inversor":
+Tabla Usuario:
 
-ID_Usuario (PK)
+ID_Usuario (clave primaria)
 Nombre
-Saldo_Inicial	
+Saldo_Inicial
 Saldo_Actual
-Email	Contraseña
+Email
+Contraseña
 Tipo de Usuario
 Fecha de Registro
+Tabla Acciones:
 
-Tabla "Acciones":
-
-ID_Accion (PK)
+ID_Accion (clave primaria)
+ID_Cotizacion (clave foránea)
 Símbolo
 Nombre_Empresa
-Precio_Compra	
-Precio_Venta	
-Cantidad_Disponible	
+Tabla Detalles_Acciones:
+
+ID_Cotizacion (clave primaria)
+Precio_Compra
+Precio_Venta
+Cantidad_Disponible
 Apertura
 Mínimo_Diario
-Máximo_Diario	
+Máximo_Diario
 Último_Cierre
+Tabla Cotizaciones:
 
-Tabla "Cotizaciones":
-
-ID_Cotizacion (PK)
-ID_Accion (FK)
+ID_Cotizacion (clave primaria)
+ID_Accion (clave foránea)
 Último_Operado
 Cantidad_Compra_Diaria
 Precio_Compra_Actual
@@ -157,27 +86,31 @@ Precio_Venta_Actual
 Apertura
 Mínimo_Diario
 Máximo_Diario
-Último_Cierre	
+Último_Cierre
 Fecha_Cotizacion
+Tabla Transacciones:
 
-Tabla "Transacciones":
-ID_Transaccion (PK)
-ID_Usuario (FK)
-ID_Accion (FK)
+ID_Transaccion (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
 Tipo_Transaccion
 Cantidad
-Precio	
-Comisión_Broker	
+Precio
+Comisión_Broker
 Fecha_Transaccion
+Tabla Portafolio:
 
-Tabla "Portafolio":
-ID_Portafolio (PK)	
-ID_Usuario (FK)	
-ID_Accion (FK)	
+ID_Portafolio (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
 Cantidad_Acciones
 Valor_Comprometido
 Ganancia_Perdida
+Tabla Saldo_Cuenta_Demo:
+
+ID_Portafolio (clave primaria)
 Saldo_Cuenta_Demo
 
-En el modelo relacional resultante, se han creado tablas separadas para cada entidad con sus respectivos atributos.
-Se han establecido las claves primarias (PK) y las claves foráneas (FK) para mantener la integridad referencial entre las tablas.
+Este modelo relacional refleja la estructura de las entidades y sus relaciones de acuerdo con la Tercera Forma Normal (3FN), 
+donde cada tabla representa una entidad con sus atributos correspondientes y las claves primarias y foráneas necesarias para 
+establecer las relaciones entre las tablas.
