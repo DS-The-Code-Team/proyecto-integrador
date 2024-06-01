@@ -58,12 +58,14 @@ Email
 Contraseña
 Tipo de Usuario
 Fecha de Registro
+
 Tabla Acciones:
 
 ID_Accion (clave primaria)
 ID_Cotizacion (clave foránea)
 Símbolo
 Nombre_Empresa
+
 Tabla Detalles_Acciones:
 
 ID_Cotizacion (clave primaria)
@@ -74,6 +76,7 @@ Apertura
 Mínimo_Diario
 Máximo_Diario
 Último_Cierre
+
 Tabla Cotizaciones:
 
 ID_Cotizacion (clave primaria)
@@ -87,6 +90,7 @@ Mínimo_Diario
 Máximo_Diario
 Último_Cierre
 Fecha_Cotizacion
+
 Tabla Transacciones:
 
 ID_Transaccion (clave primaria)
@@ -97,6 +101,7 @@ Cantidad
 Precio
 Comisión_Broker
 Fecha_Transaccion
+
 Tabla Portafolio:
 
 ID_Portafolio (clave primaria)
@@ -105,6 +110,7 @@ ID_Accion (clave foránea)
 Cantidad_Acciones
 Valor_Comprometido
 Ganancia_Perdida
+
 Tabla Saldo_Cuenta_Demo:
 
 ID_Portafolio (clave primaria)
