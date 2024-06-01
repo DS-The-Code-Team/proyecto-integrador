@@ -1,0 +1,183 @@
+- 1: Identificar las dependencias funcionales en las entidades:
+
+Entidad "Usuario/Inversor":
+
+Atributos:
+ID_Usuario (PK)
+Nombre
+Saldo_Inicial
+Saldo_Actual
+Email
+Contraseña
+Tipo de Usuario
+Fecha de Registro
+
+Dependencias:
+Nombre
+Saldo_Inicial
+Saldo_Actual
+Email
+Contraseña
+Tipo de Usuario
+Fecha de Registro DEPENDEN DE --> ID_Usuario (PK)
+
+Entidad "Acciones":
+
+Atributos: 
+ID_Accion (PK)
+Símbolo
+Nombre_Empresa
+Precio_Compra 
+Precio_Venta
+Cantidad_Disponible
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+
+Dependencias:
+Símbolo
+Nombre_Empresa
+Precio_Compra
+Precio_Venta
+Cantidad_Disponible
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre DEPENDEN DE --> ID_Accion (PK)
+
+Entidad "Cotizaciones":
+
+Atributos: 
+ID_Cotizacion (PK)
+ID_Accion (FK)
+Último_Operado
+Cantidad_Compra_Diaria
+Precio_Compra_Actual
+Precio_Venta_Actual
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+Fecha_Cotizacion
+
+Dependencias:
+Último_Operado
+Cantidad_Compra_Diaria
+Precio_Compra_Actual
+Precio_Venta_Actual
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+Fecha_Cotizacion DEPENDEN DE --> ID_Cotizacion (PK)
+ID_Accion DEPENDE DE  ID_Cotizacion (FK)
+
+Entidad "Transacciones":
+
+Atributos:
+ID_Transaccion (PK)
+ID_Usuario (FK)
+ID_Accion (FK)
+Tipo_Transaccion
+Cantidad
+Precio
+Comisión_Broker
+Fecha_Transaccion
+
+Dependencias:
+ID_Usuario
+ID_Accion
+Tipo_Transaccion
+Cantidad
+Precio
+Comisión_Broker
+Fecha_Transaccion DEPENDEN DE --> ID_Transaccion (PK)
+
+Entidad "Portafolio":
+
+Atributos: 
+ID_Portafolio (PK)
+ID_Usuario (FK)
+ID_Accion (FK)
+Cantidad_Acciones
+Valor_Comprometido
+Ganancia_Perdida
+Saldo_Cuenta_Demo
+
+Dependencias:
+ID_Usuario
+ID_Accion
+Cantidad_Acciones
+Valor_Comprometido
+Ganancia_Perdida
+Saldo_Cuenta_Demo DEPENDEN DE --> ID_Portafolio (PK)
+
+- 2: Eliminar las dependencias parciales y transitivas:
+
+No se identifican dependencias parciales o transitivas en las entidades mencionadas.
+
+Paso 3: Asegurar que cada atributo no clave dependa de la clave primaria completa:
+
+Los atributos no clave en cada entidad dependen de la clave primaria completa, cumpliendo con la 3FN.
+
+Modelo Relacional Resultante:
+
+Tabla "Usuario/Inversor":
+
+ID_Usuario (PK)
+Nombre
+Saldo_Inicial	
+Saldo_Actual
+Email	Contraseña
+Tipo de Usuario
+Fecha de Registro
+
+Tabla "Acciones":
+
+ID_Accion (PK)
+Símbolo
+Nombre_Empresa
+Precio_Compra	
+Precio_Venta	
+Cantidad_Disponible	
+Apertura
+Mínimo_Diario
+Máximo_Diario	
+Último_Cierre
+
+Tabla "Cotizaciones":
+
+ID_Cotizacion (PK)
+ID_Accion (FK)
+Último_Operado
+Cantidad_Compra_Diaria
+Precio_Compra_Actual
+Precio_Venta_Actual
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre	
+Fecha_Cotizacion
+
+Tabla "Transacciones":
+ID_Transaccion (PK)
+ID_Usuario (FK)
+ID_Accion (FK)
+Tipo_Transaccion
+Cantidad
+Precio	
+Comisión_Broker	
+Fecha_Transaccion
+
+Tabla "Portafolio":
+ID_Portafolio (PK)	
+ID_Usuario (FK)	
+ID_Accion (FK)	
+Cantidad_Acciones
+Valor_Comprometido
+Ganancia_Perdida
+Saldo_Cuenta_Demo
+
+En el modelo relacional resultante, se han creado tablas separadas para cada entidad con sus respectivos atributos.
+Se han establecido las claves primarias (PK) y las claves foráneas (FK) para mantener la integridad referencial entre las tablas.
