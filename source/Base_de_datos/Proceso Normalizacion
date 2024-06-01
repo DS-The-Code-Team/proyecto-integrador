@@ -1,8 +1,7 @@
 Usuario/Inversor:
-
 Mantener la entidad como está, ya que no presenta dependencias transitivas.
-Acciones:
 
+Acciones:
 Dividir la entidad "Acciones" en dos tablas:
 
 Acciones:
