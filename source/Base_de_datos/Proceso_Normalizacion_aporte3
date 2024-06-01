@@ -1,0 +1,121 @@
+Entidades:
+Usuario/Inversor
+Acciones
+Cotizaciones
+Transacciones
+Portafolio
+
+Usuario/Inversor:
+ID_Usuario (clave primaria)
+ID_Portafolio (clave foránea)
+Nombre
+Saldo_Inicial
+Saldo_Actual
+Email
+Contraseña
+Tipo de Usuario (por ejemplo, cliente, empleado)
+Fecha de Registro
+
+Acciones:
+ID_Accion (clave primaria)
+ID_Cotizacion (clave foránea)
+Símbolo
+Nombre_Empresa
+Precio_Compra
+Precio_Venta
+Cantidad_Disponible
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+
+Cotizaciones:
+ID_Cotizacion (clave primaria)
+ID_Accion (clave foránea)
+Último_Operado
+Cantidad_Compra_Diaria
+Precio_Compra_Actual
+Precio_Venta_Actual
+Apertura
+Mínimo_Diario
+Máximo_Diario
+Último_Cierre
+Fecha_Cotizacion
+
+Transacciones:
+ID_Transaccion (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
+Tipo_Transaccion (compra/venta)
+Cantidad
+Precio
+Comisión_Broker
+Fecha_Transaccion
+
+Portafolio:
+ID_Portafolio (clave primaria)
+ID_Usuario (clave foránea)
+ID_Accion (clave foránea)
+Cantidad_Acciones
+Valor_Comprometido
+Ganancia_Perdida
+Saldo_Cuenta_Demo
+
+
+
+MODIFICACIONES:
+
+Usuario/Inversor:
+ID_Usuario
+ID_Portafolio
+nombre
+email
+contraseña
+tipo_usuario
+ID_cuenta
+fecha
+
+Acciones:
+ID_accion
+ID_cotizacon
+Simbolo
+nombre
+ID_compras
+ID_ventas
+Cant_disponible
+Apertura
+Ultimo_cierre
+
+Cotización:
+ID_cotizacion
+ID_accion
+Ultimo_operado
+ID_compras
+ID_ventas
+Min_diario
+Max_diario
+fecha
+
+Portfolio:
+ID_portfolio
+ID_accion
+Valor_comprometido
+ID_cuenta
+
+Cuenta:
+ID_cuenta
+ID_inversor
+Saldo_inicial
+Saldo_final
+Saldo_cuenta
+Ganancia_Perdida
+
+Compras:
+ID_compra
+Cant_compras
+Precio_compras
+
+Ventas:
+ID_ventas
+Cant_venta
+Precio_venta
