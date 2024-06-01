@@ -65,8 +65,6 @@ Saldo_Cuenta_Demo
 
 
 
-
-
 Usuario/Inversor - Transacciones:
 Un usuario puede realizar varias transacciones de compra y venta de acciones.
 Relación uno a muchos: Un usuario puede tener múltiples transacciones, pero una transacción pertenece a un único usuario.
@@ -82,3 +80,67 @@ Relación uno a muchos: Un usuario puede tener múltiples entradas en su portafo
 Acciones - Transacciones:
 Las transacciones de compra y venta están relacionadas con las acciones involucradas.
 Relación uno a muchos: Una acción puede estar involucrada en múltiples transacciones, pero cada transacción se refiere a una única acción.
+
+
+
+
+BASE DE DATOS NORMALIZADA
+
+Usuario/inversor:
+ID_usuario
+ID_portafolio
+ID_cuenta
+nombre
+email
+contraseña
+
+Acciones:
+ID_accion
+ID_empresa
+ID_cotizacion
+Cant_disponible
+Valor_accion
+fecha
+
+Cotización
+ID_cotizacion
+ID_accion
+Apertura
+Ultimo_cierre
+Min_diario
+Max_diario
+Fecha_cotizacion
+
+Portfolio:
+ID_portfolio
+ID_usuario
+ID_accion
+ID_cuenta
+Cant_acciones
+Valor_comprometido
+
+Cuenta:
+ID_cuenta
+ID_inversor
+Saldo_inicial
+Saldo_actual
+Saldo_cuenta
+Rentabilidad
+
+Empresa:
+ID_empresa
+Simbolo
+Nombre
+
+Compras:
+ID_compras
+Cant_compra
+Precio_compra
+Comision_compra
+
+Ventas:
+ID_ventas
+Cant_venta
+Precio_venta
+Comision_venta
+
