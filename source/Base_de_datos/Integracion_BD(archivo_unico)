@@ -87,60 +87,85 @@ Relación uno a muchos: Una acción puede estar involucrada en múltiples transa
 BASE DE DATOS NORMALIZADA
 
 Usuario/inversor:
-ID_usuario
-ID_portafolio
-ID_cuenta
-nombre
-email
-contraseña
-
-Acciones:
-ID_accion
-ID_empresa
-ID_cotizacion
-Cant_disponible
-Valor_accion
-fecha
-
-Cotización
-ID_cotizacion
-ID_accion
-Apertura
-Ultimo_cierre
-Min_diario
-Max_diario
-Fecha_cotizacion
-
-Portfolio:
-ID_portfolio
-ID_usuario
-ID_accion
-ID_cuenta
-Cant_acciones
-Valor_comprometido
-
-Cuenta:
-ID_cuenta
-ID_inversor
-Saldo_inicial
-Saldo_actual
-Saldo_cuenta
-Rentabilidad
+  ID_usuario
+  ID_portafolio
+  ID_cuenta
+  nombre
+  email
+  contraseña
+La clave primaria es ID_usuario.
+Las claves foraneas son ID_portafolio y ID_cuenta
+Relacionada con Portafolio (uno a muchos) Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+Relacionada con Cuenta (uno a muchos) Un usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
 
 Empresa:
-ID_empresa
-Simbolo
-Nombre
+  ID_empresa
+  Simbolo
+  Nombre
+Clave primaria es ID_empresa
+
+Acciones:
+  ID_accion
+  ID_empresa
+  ID_cotizacion
+  Cant_disponible
+  Valor_accion
+  fecha
+La clave primaria es ID_Accion.
+Las claves foraneas son ID_empresa y ID_cotizacion
+Relacionada con Cotizaciones (uno a muchos).
+Relacionada con empresa (muchos a uno). Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
+
+Cotizaciones
+  ID_cotizacion
+  ID_accion
+  Apertura
+  Ultimo_cierre
+  Min_diario
+  Max_diario
+  Fecha_cotizacion
+La clave primaria es ID_cotizacion.
+La clave foranea es ID_acción.
+Relacionada con Acciones (muchos a uno). Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción. 
+
+
+Portfolio:
+  ID_portfolio
+  ID_usuario
+  ID_acción
+  Cant_acciones
+  Valor_comprometido
+La clave primaria es ID_Portafolio.
+Las claves foraneas son ID_usuario, ID_acción y ID_cuenta
+Relacionada con Usuario (muchos a uno). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+Relacionada con Acciones (muchos a muchos). Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
+
+
+Cuenta:
+  ID_cuenta
+  ID_usuario
+  Saldo_inicial
+  Saldo_actual
+  Saldo_cuenta
+  Rentabilidad
+La clave primaria es ID_cuenta
+La clave foranea es ID_usuario
+Relacionada con usuario (muchos a uno) Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
+
+
+
 
 Compras:
-ID_compras
-Cant_compra
-Precio_compra
-Comision_compra
+  ID_compras
+  Cant_compra
+  Precio_compra
+  Comision_compra
+Clave primaria es ID_compras
 
 Ventas:
-ID_ventas
-Cant_venta
-Precio_venta
-Comision_venta
+  ID_ventas
+  Cant_venta
+  Precio_venta
+  Comision_venta
+Clave primaria es ID_ventas
 
