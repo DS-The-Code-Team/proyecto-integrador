@@ -1,0 +1,107 @@
+Proceso de Normalización
+
+Entidad n° 1: Usuario/inversor
+  Primera forma normal (1FN)
+    Cada atributo contiene valores atómicos
+    ID_Usuario se convierte en la clave primaria
+    ID_Portafolio se elimina de esta tabla para evitar redundancias.
+  Segunda Formal Normal (2FN)
+    No se aplican cambios adicionales ya que no hay dependencias parciales (todas las columnas dependen de la clave primaria).
+  Tercera Forma Normal (3FN)
+    No hay dependencias transitivas (ningún atributo n clave depende de otro atributo no clave).
+
+	Tabla: Usuario/inversor
+    PK	ID_Usuario
+	      Nombre
+	      Saldo_inicial
+	      Saldo_actual
+	      Email
+	      Contraseña
+	      Tipo_usuario
+	      Fecha_registro
+
+
+Entidad n°2: Acciones
+  Primera forma normal (1FN)
+    Cada atributo contiene valores atómicos
+    ID_Acción se convierte en la clave primaria
+    ID_Cotizacion se elimina de esta tabla (una acción puede tener múltiples cotizaciones).
+  Segunda Forma Normal (2FN)
+    No hay dependencias parciales ya que todos los atributos dependen de la clave primaria.
+  Tercera Forma Normal (3FN)
+    No hay dependencias transitivas.
+
+  Tabla: Acciones
+    PK	ID_Acción
+	      Símbolo
+	      Nombre_empresa
+	      Precio_compra
+	      Precio_venta
+	      Cantidad_disponible
+	      Precio_apertura
+	      Mínimo_diario
+	      Máximo_diario
+	      Último_cierre
+
+
+Entidad n°3: Cotizaciones
+  Primera Forma Normal (1FN)
+    Atributos atómicos.
+    ID_Acción se mantiene como clave foránea.
+  Segunda Forma Normal (2FN)
+    No hay dependencias parciales ya que todos los atributos dependen de la clave primaria.
+  Tercera Forma Normal (3FN)
+    No hay dependencias transitivas.
+
+  Tabla: Cotizaciones
+    PK	ID_Cotización
+    FK	ID_Acción
+	      Último_operado
+	      Cantidad_compra_diaria
+	      Precio_compra_actual
+	      Precio_venta_actual
+	      Precio_apertura
+	      Mínimo_diario
+	      Máximo_diario
+	      Último_cierre
+	      Fecha_cotización
+
+
+Entidad n°4: Transacciones
+  Primera Forma Normal (1FN)
+    Atributos atómicos.
+    ID_Usuario e ID_Acción se mantienen como claves foráneas.
+  Segunda Forma Normal (2FN)
+    No hay dependencias parciales.
+  Tercera Forma Normal (3FN)
+    No hay dependencias transitivas.
+
+Tabla: Transacciones
+  PK	ID_Transacción
+  FK	ID_Usuario
+  FK	ID_Acción
+	    Tipo_transacción
+	    Cantidad
+	    Precio
+	    Comisión_bróker
+	    Fecha_transacción
+
+
+Entidad n°5: Portafolio
+  Primera Forma Normal (1FN)
+    Atributos atómicos.
+    ID_Usuario e ID_Accion se mantienen como claves foráneas.
+  Segunda Forma Normal (2FN)
+    No hay dependencias parciales.
+  Tercera Forma Normal (3FN)
+    No hay dependencias transitivas.
+
+Tabla: Portafolio
+  PK	ID_Portafolio
+  FK	ID_Usuario
+  FK	ID_Acción
+    	Cantidad_acciones
+    	Valor_comprmetido
+    	Ganancia_perdida
+    	Saldo_cuenta_demo
+
