@@ -152,6 +152,13 @@ La clave primaria es ID_cuenta
 La clave foranea es ID_usuario
 Relacionada con usuario (muchos a uno) Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
 
+Transacción:
+ID_transaccion
+ID_usuario
+ID_accion
+ID_compras
+ID_ventas
+Fecha_transaccion
 
 
 
