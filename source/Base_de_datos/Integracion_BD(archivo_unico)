@@ -153,24 +153,28 @@ La clave foranea es ID_usuario
 Relacionada con usuario (muchos a uno) Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
 
 Transacción:
-ID_transaccion
-ID_usuario
-ID_accion
-ID_compras
-ID_ventas
-Fecha_transaccion
+  ID_transaccion
+  ID_usuario
+  ID_accion
+  ID_compra
+  ID_venta
+  Fecha_transaccion
+La clave primaria es ID_transaccion.
+las claves forneas son ID_usuario, ID_accion, ID_compras, ID_ventas.
+Relacionada con usuario (muchs a uno) Un usuario puede realizar varias transacciones, pero cada transacción es realizada por un solo usuario.
+Relacionada con acción (muchos a uno) Una acción puede estar involucrada en varias transacciones, pero cada transacción involucra una sola acción.
+Relacionada con compra (uno a uno) una compra esta asociada a una transacción y una transacción a una compra
+Relacionada con venta (uno a uno) una venta esta asociada a una transacción y una transacción a una venta
 
-
-
-Compras:
-  ID_compras
+Compra:
+  ID_compra
   Cant_compra
   Precio_compra
   Comision_compra
 Clave primaria es ID_compras
 
-Ventas:
-  ID_ventas
+Venta:
+  ID_venta
   Cant_venta
   Precio_venta
   Comision_venta
