@@ -1,0 +1,76 @@
+
+Agregue como están detalladas en la vbase de datos, para crear las clases pueden variar algunas cosas
+
+Inversor (persona fisica » cuenta de usuario)
+  ID_usuario
+  ID_portafolio
+  ID_cuenta
+  nombre
+  email
+  contraseña
+  
+Cuenta (cuenta para operar seria como la banco)
+  ID_cuenta
+  ID_usuario
+  Saldo_inicial
+  Saldo_actual
+  Saldo_cuenta
+  Rentabilidad
+  
+Empresa
+  ID_empresa
+  Simbolo
+  Nombre
++++ Acciones
+  
+Accion
+  ID_accion
+  ID_empresa
+  ID_cotizacion
+  Cant_disponible
+  Valor_accion
+  fecha
+
+Cotizacion
+  ID_cotizacion
+  ID_accion
+  Apertura
+  Ultimo_cierre
+  Min_diario
+  Max_diario
++++  Precio_Compra
++++  Precio_Venta
+  Fecha_cotizacion
+  
+Transaccion
+  ID_transaccion
+  ID_usuario
+  ID_accion
+  ID_compra
+  ID_venta
+  Fecha_transaccion
+  
+Compra
+  ID_compra
+  Cant_compra
+  Precio_compra
+---  Comision_compra
++++ Comision_broker
+
+Venta
+  ID_venta
+  Cant_venta
+  Precio_venta 
+--- Comision_venta
++++ Comision_broker
+
+Portafolio
+  ID_portfolio
+  ID_usuario
+  ID_acción
+  Cant_acciones
+  Valor_comprometido
+
+Broker
+	Nombre
+	Comision
