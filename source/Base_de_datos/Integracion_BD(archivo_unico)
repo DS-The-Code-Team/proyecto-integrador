@@ -19,8 +19,6 @@ Fecha de Registro
 Acciones:
 ID_Accion (clave primaria)
 ID_Cotizacion (clave foránea)
-Símbolo
-Nombre_Empresa
 Precio_Compra
 Precio_Venta
 Cantidad_Disponible
@@ -28,6 +26,11 @@ Apertura
 Mínimo_Diario
 Máximo_Diario
 Último_Cierre
+
+Empresas:
+ID_empresa
+Símbolo
+Nombre_Empresa
 
 Cotizaciones:
 ID_Cotizacion (clave primaria)
@@ -49,7 +52,6 @@ ID_Accion (clave foránea)
 Tipo_Transaccion (compra/venta)
 Cantidad
 Precio
-Comisión_Broker
 Fecha_Transaccion
 
 Portafolio:
@@ -61,7 +63,9 @@ Valor_Comprometido
 Ganancia_Perdida
 Saldo_Cuenta_Demo
 
-
+Broker:
+ID_broker
+Comisión_Broker
 
 
 
@@ -81,6 +85,7 @@ Acciones - Transacciones:
 Las transacciones de compra y venta están relacionadas con las acciones involucradas.
 Relación uno a muchos: Una acción puede estar involucrada en múltiples transacciones, pero cada transacción se refiere a una única acción.
 
+Empresas - Acciones:
 
 
 
