@@ -86,7 +86,10 @@ Las transacciones de compra y venta están relacionadas con las acciones involuc
 Relación uno a muchos: Una acción puede estar involucrada en múltiples transacciones, pero cada transacción se refiere a una única acción.
 
 Empresas - Acciones:
+Empresas está relacionado con acciones ya que, cada empresa cuenta con una diversificación de acciones. 
+Relación uno a muchos: Una empresa cuenta con muchas acciones a su disposición, pero cada acción corresponde a una empresa.  
 
+Broker - Transacciones
 
 
 BASE DE DATOS NORMALIZADA
