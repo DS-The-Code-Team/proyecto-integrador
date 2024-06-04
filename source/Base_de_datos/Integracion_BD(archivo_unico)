@@ -49,6 +49,7 @@ Transacciones:
 ID_Transaccion (clave primaria)
 ID_Usuario (clave foránea)
 ID_Accion (clave foránea)
+ID_broker (clave foránea)
 Tipo_Transaccion (compra/venta)
 Cantidad
 Precio
