@@ -90,6 +90,8 @@ Empresas está relacionado con acciones ya que, cada empresa cuenta con una dive
 Relación uno a muchos: Una empresa cuenta con muchas acciones a su disposición, pero cada acción corresponde a una empresa.  
 
 Broker - Transacciones
+Un broker puede realizar varias transacciones de compra y venta.
+Relación uno a muchos: Un broker puede tener varias transacciones, pero una transacción de compra/venta corresponde a un broker.
 
 
 BASE DE DATOS NORMALIZADA
