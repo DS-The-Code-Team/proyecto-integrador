@@ -134,10 +134,14 @@ Cotizaciones
   Ultimo_cierre
   Min_diario
   Max_diario
+  Precio_compra
+  precio_venta
   Fecha_cotizacion
 La clave primaria es ID_cotizacion.
 La clave foranea es ID_acción.
 Relacionada con Acciones (muchos a uno). Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción. 
+Se relaciona con compras (uno a muchos) una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+Se relaciona con ventas (uno a muchos) una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
 
 
 Portfolio:
@@ -183,6 +187,9 @@ Compra:
   Precio_compra
   Comision_compra
 Clave primaria es ID_compras
+Clave foranea es Precio_compra
+Se relaciona con cotizaciones (uno a muchos) una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+
 
 Venta:
   ID_venta
@@ -190,4 +197,6 @@ Venta:
   Precio_venta
   Comision_venta
 Clave primaria es ID_ventas
+Calve foranea es Precio_venta
+Se relaciona con cotizaciones (uno a muchos) una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
 
