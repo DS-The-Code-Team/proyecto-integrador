@@ -1,8 +1,5 @@
-Personas físicas 
-Instituciones 
-Empresas 
-Acción 
-inversion
-
- 
-
+transaccion 
+compra
+venta
+portafolio 
+broker
