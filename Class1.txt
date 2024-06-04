@@ -1,7 +1,5 @@
-ganancias
-Activos 
-compra 
-venta
-renta 
- 
-
+inversor
+cuenta 
+empresa
+accion 
+cotizacion
