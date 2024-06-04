@@ -5,8 +5,8 @@ Acción
 inversion
 Ganancias 
 Activos 
-Oferta 
-Demanda 
+compra
+venta
 renta fija 
 renta variable 
  
