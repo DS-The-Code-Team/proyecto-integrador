@@ -6,9 +6,7 @@ inversion
 Ganancias 
 Activos 
 Oferta 
-Demanda
-compra 
-venta 
+Demanda 
 renta fija 
 renta variable 
  
