@@ -4,6 +4,7 @@ Acciones
 Cotizaciones
 Transacciones
 Portafolio
+Broker
 
 Usuario/Inversor:
 ID_Usuario (clave primaria)
@@ -67,7 +68,7 @@ Saldo_Cuenta_Demo
 Broker:
 ID_broker
 Comisión_Broker
-
+Nombre_broker
 
 
 Usuario/Inversor - Transacciones:
