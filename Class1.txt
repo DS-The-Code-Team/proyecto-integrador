@@ -2,7 +2,6 @@ ganancias
 Activos 
 compra 
 venta
-renta fija 
-renta variable 
+renta 
  
 
