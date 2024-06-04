@@ -1,0 +1,26 @@
+*-- Tema Base de Datos --*
+Estaba viendo las entidades para hacer el diagrama de clases, les dejo una sugerencia de las entidades que habia considerado para crear las clases, serían un agregado a lo que ya hicieron
+
+*Entidades:*
++++ Empresas (son las que proveen las acciones)
++++ Broker (intermediario, se le asigna una comisión)
+
+
+*Acciones:*
++++ Nombre_Empresa » ID_empresa (clave foránea)
+Agregado: las acciones pertenecen a una empresa, entonces la empresa también es una entidad
+
+*Empresa:*
++++  ID_Accion (clave foranea)
+Agregado: el ID_Accion marca las acciones que pertenecen a esa empresa
+
+*Transacciones:*
++++ Comisión_Broker (clave foranea)
+Agregado: el broker también seria una entidad, además en el caso que cambiara la comisión es más util tenerlo dentro de la entidad Broker, es más fácil de ubicar sí lo ve alguien que no hizo el código
+
++++
+Broker:
+Comisión_Broker (clave primaria)
+Nombre
++++
+
