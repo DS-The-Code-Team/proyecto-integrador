@@ -1,0 +1,78 @@
+### Documentación del Desarrollo de la Base de Datos para ARGBroker Demo
+
+#### Introducción
+Este documento presenta la documentación del desarrollo de un programa de Base de Datos diseñado para el proyecto ARGBroker Demo. El contenido describe detalladamente las entidades, sus atributos, relaciones y su funcionalidad dentro del programa.
+
+#### Descripción de las Entidades
+
+**Usuario/Inversor**
+La entidad "Usuario/Inversor" almacena información relevante sobre los inversores, incluyendo su nombre, correo electrónico y contraseña de acceso al programa. La clave primaria de esta entidad es ID_usuario.
+
+**Relaciones:**
+- Relacionada con Portafolio (uno a muchos): Cada usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+- Relacionada con Cuenta (uno a muchos): Cada usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
+
+**Empresa**
+En esta entidad se almacena información descriptiva sobre las empresas, como su símbolo identificatorio y nombre. La clave primaria es ID_empresa.
+
+**Relación uno a muchos:**
+- Una empresa puede tener muchas acciones disponibles, pero cada acción corresponde a una empresa.
+
+**Acciones**
+Esta entidad almacena datos relacionados con la cantidad y valor de las acciones, junto con su fecha correspondiente. La clave primaria es ID_accion.
+
+**Relaciones:**
+- Relacionada con Cotizaciones (uno a muchos): Una acción puede tener múltiples cotizaciones, pero una cotización corresponde a una única acción.
+- Relacionada con Empresa (muchos a uno): Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
+
+**Cotizaciones**
+La entidad "Cotizaciones" contiene información sobre el valor de apertura y cierre de las acciones, así como los precios de compra y venta con sus fechas respectivas. La clave primaria es ID_cotizacion.
+
+**Relaciones:**
+- Relacionada con Acciones (muchos a uno): Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción.
+- Relacionada con Compras (uno a muchos): Una cotización puede tener varias compras, pero una compra corresponde a una cotización.
+- Relacionada con Ventas (uno a muchos): Una cotización puede tener varias ventas, pero una venta corresponde a una cotización.
+
+**Portafolio**
+La entidad "Portafolio" detalla la cantidad de acciones que posee un usuario junto con su valor comprometido. La clave primaria es ID_portafolio.
+
+**Relaciones:**
+- Relacionada con Usuario (muchos a uno): Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+- Relacionada con Acciones (muchos a muchos): Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
+
+**Stock_Acciones**
+Esta entidad representa la cantidad de acciones que un usuario tiene dentro de su portafolio. La clave primaria es ID_accion_portafolio.
+
+**Relaciones:**
+- Relacionada con Portafolio (uno a uno): Un portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
+- Relacionada con Acciones (uno a muchos): Un stock de acciones contiene muchas acciones, pero una acción pertenece a un stock.
+
+**Cuenta**
+La entidad "Cuenta" proporciona información sobre los saldos iniciales y actuales que un usuario posee en su cuenta. La clave primaria es ID_cuenta.
+
+**Relaciones:**
+- Relacionada con Usuario (muchos a uno): Un usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
+
+**Transacción**
+Esta entidad registra las operaciones de compra y venta realizadas por un usuario, junto con sus fechas respectivas. La clave primaria es ID_transaccion.
+
+**Relaciones:**
+- Relacionada con Usuario (muchos a uno): Un usuario puede realizar varias transacciones, pero cada transacción es realizada por un solo usuario.
+- Relacionada con Acción (muchos a uno): Una acción puede estar involucrada en varias transacciones, pero cada transacción involucra una sola acción.
+- Relacionada con Compra (uno a uno): Una compra está asociada a una transacción y una transacción a una compra.
+- Relacionada con Venta (uno a uno): Una venta está asociada a una transacción y una transacción a una venta.
+
+**Compra**
+La entidad "Compra" registra los detalles de las compras efectuadas, incluyendo la cantidad, precio y comisión correspondiente para el Broker. La clave primaria es ID_compras.
+
+**Relación uno a muchos:**
+- Relacionada con Cotizaciones: Una misma cotización puede tener varias compras, pero una compra solo corresponde a una cotización.
+
+**Venta**
+La entidad "Venta" registra los detalles de las ventas efectuadas, incluyendo la cantidad, precio y comisión correspondiente para el Broker. La clave primaria es ID_ventas.
+
+**Relación uno a muchos:**
+- Relacionada con Cotizaciones: Una misma cotización puede tener varias ventas, pero una venta solo corresponde a una cotización.
+
+#### Conclusiones
+La documentación anterior detalla las entidades, atributos y relaciones de la base de datos desarrollada para el proyecto ARGBroker Demo. Esta información es fundamental para comprender la estructura y funcionalidad del sistema, facilitando su desarrollo, mantenimiento y uso por parte de los usuarios.
