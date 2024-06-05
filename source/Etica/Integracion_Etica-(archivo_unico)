@@ -1,11 +1,21 @@
 # ARGBroker Demo
 
-## Descripción
-El proyecto ARGBroker Demo es una aplicación destinada a simular operaciones de compra y venta de acciones en la Bolsa de Valores de Buenos Aires (Merval). Está diseñado para que inversores (personas físicas, empresas o instituciones) puedan interactuar y realizar transacciones en un entorno de prueba.
+#Descripción
+El proyecto ARGBroker Demo es una aplicación destinada a simular operaciones de compra y venta de acciones en 
+la Bolsa de Valores de Buenos Aires (Merval). Está diseñado para que inversores (personas físicas, empresas o 
+instituciones) puedan interactuar y realizar transacciones en un entorno de prueba.
 
 ## Propósito
-Facilitar el aprendizaje y la práctica de operaciones bursátiles en un entorno seguro y controlado, brindando a los usuarios herramientas y funcionalidades necesarias para gestionar sus inversiones de manera eficiente.
+Facilitar el aprendizaje y la práctica de operaciones bursátiles en un entorno seguro y controlado, brindando 
+a los usuarios herramientas y funcionalidades necesarias para gestionar sus inversiones de manera eficiente.
 
 ## Contexto
-Desarrollado en el marco del módulo Programador, este proyecto integra conocimientos y habilidades adquiridas durante el curso, permitiendo a los estudiantes trabajar en equipo y aplicar prácticas de desarrollo de software profesional.
+Desarrollado en el marco del módulo Programador, este proyecto integra conocimientos y habilidades adquiridas 
+durante el curso, permitiendo a los estudiantes trabajar en equipo y aplicar prácticas de desarrollo de software profesional.
 
+# Conformación Legal del Grupo
+
+### Estructura de la Empresa
+- **Socios:** Fundadores del proyecto que aportan capital y toman decisiones estratégicas.
+- **CEO:** Responsable de la gestión y dirección de la empresa.
+- **Empleados:** Personal contratado para desarrollar y operar la aplicación.
