@@ -119,3 +119,78 @@ Ventas:
 ID_ventas
 Cant_venta
 Precio_venta
+
+
+#DOCUMENTACION
+
+
+Este archivo es para presentar la documentación del desarrollo de un programa de Base de Datos para el proyecto de ARGBroker Demo. 
+Se muestra el desarrollo descriptivo de las entidades con sus respectivos atributos y relaciones pertinentes, demarcando claves primarias de cada uno y claves foráneas relacionales. 
+A continuación, se procederá a realizar una descripción detallada de las entidades que conforman este programa y aquella información que las mismas brindan a los usuarios. 
+
+Usuario/inversor: Dentro de esta entidad vamos a almacenar información relevante que respecta del inversor tal como, su nombre, email y contraseña con la que accede y se identifica al mismo en el programa. 
+La clave primaria es ID_usuario.
+Las claves foráneas son ID_portafolio e ID_cuenta
+Relacionada con Portafolio (uno a muchos). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+Relacionada con Cuenta (uno a muchos). Un usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
+
+
+Empresa: En este ítem se almacena la información descriptiva de la empresa, tal como Símbolo identificatorio de la empresa y nombre de la misma.
+La clave primaria es ID_empresa.
+Relación uno a muchos: Una empresa cuenta con muchas acciones a su disposición, pero cada acción corresponde a una empresa. 
+
+
+Acciones: En esta entidad se encuentran almacenados aquellos datos correspondientes a la cantidad de acciones y el valor de las mismas con su respectiva fecha. 
+La clave primaria es ID_accion.
+Las claves foráneas son ID_empresa e ID_cotizacion.
+Relacionada con acciones (uno a muchos). Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
+Relacionada con empresa (muchos a uno). Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
+
+
+Cotizaciones: Esta entidad está conformada por aquellos datos que indican el valor de apertura y cierre de las acciones, el mínimo y máximo valor por el cual pueden operar las mismas y los precios de compra y venta con su respectiva fecha. 
+La clave primaria es ID_cotizacion.
+La clave foránea es ID_accion, precio_compra y precio_venta.
+Relacionada con Acciones (muchos a uno). Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción. 
+Relacionada con compras (uno a muchos) Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+Relacionada con ventas (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
+
+
+Portfolio: Es una entidad donde se detallan la cantidad de acciones que posee el usuario con el valor comprometido del mismo. 
+La clave primaria es ID_Portafolio.
+Las claves foráneas son ID_usuario, ID_accion.
+Relacionada con Usuario (muchos a uno). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+Relacionada con Acciones (muchos a muchos). Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
+
+
+Stock_acciones: Esta entidad representa la cantidad de acciones que dispone un usuario dentro de su portafolio. 
+La clave primaria es ID_accion_portafolio.
+La clave foránea es ID_accion.
+Relacionado con Portafolio (uno a uno). Uno portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
+Relacionada con Acciones (uno a muchos). Un stock de acciones contiene muchas acciones, pero una acción pertenece a un stock. 
+
+
+Cuenta: Este apartado brinda los datos referidos a los saldos iniciales y actuales que posee el usuario dentro de su cuenta.
+La clave primaria es ID_cuenta.
+La clave foránea es ID_usuario.
+Relacionada con usuario (muchos a uno). Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
+
+
+Transaccion: Esta entidad refleja los datos correspondientes a las operaciones de compra y venta que realiza el usuario con su respectiva fecha.
+La clave primaria es ID_transaccion.
+Las claves foráneas son ID_usuario, ID_accion, ID_compras, ID_ventas.
+Relacionada con usuario (muchos a uno). Un usuario puede realizar varias transacciones, pero cada transacción es realizada por un solo usuario.
+Relacionada con acción (muchos a uno). Una acción puede estar involucrada en varias transacciones, pero cada transacción involucra una sola acción.
+Relacionada con compra (uno a uno). Una compra esta asociada a una transacción y una transacción a una compra.
+Relacionada con venta (uno a uno). Una venta esta asociada a una transacción y una transacción a una venta.
+
+
+Compra: Representa el registro de datos de las compras efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
+La clave primaria es ID_compras.
+La clave foránea es Precio_compra.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo corresponde a una cotización.
+
+
+Venta: Representa el registro de datos de las ventas efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
+La clave primaria es ID_ventas.
+La clave foránea es Precio_venta.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo corresponde a una cotización.
