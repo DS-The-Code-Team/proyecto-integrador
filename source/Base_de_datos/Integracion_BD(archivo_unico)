@@ -201,7 +201,7 @@ Compra:
   comision_compra
 La clave primaria es ID_compras.
 La clave foránea es Precio_compra.
-Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo corresponde a una cotización.
 
 
 Venta:
@@ -210,8 +210,8 @@ Venta:
   precio_venta
   comision_venta
 La clave primaria es ID_ventas.
-La clave foranea es Precio_venta.
-Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
+La clave foránea es Precio_venta.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo corresponde a una cotización.
 
 
 #DOCUMENTACIÓN
@@ -279,10 +279,10 @@ Relacionada con venta (uno a uno). Una venta esta asociada a una transacción y 
 Compra: Representa el registro de datos de las compras efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
 La clave primaria es ID_compras.
 La clave foránea es Precio_compra.
-Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo corresponde a una cotización.
 
 
 Venta: Representa el registro de datos de las ventas efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
 La clave primaria es ID_ventas.
-La clave foranea es Precio_venta.
-Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
+La clave foránea es Precio_venta.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo corresponde a una cotización.
