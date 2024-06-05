@@ -132,12 +132,13 @@ Las claves foráneas son ID_empresa e ID_cotizacion.
 Relacionada con acciones (uno a muchos). Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
 Relacionada con empresa (muchos a uno). Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
 
-Accion_portafolio
+Stock_acciones
   ID_accion_portafolio
   ID_accion
 La clave primaria es ID_accion_portafolio.
 La clave foránea es ID_accion.
-Relacionada con 
+Relacionado con Portafolio (uno a uno). Uno portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
+Relacionada con Acciones (uno a muchos). Un stock de acciones contiene muchas acciones, pero una acción pertenece a un stock. 
 
 Cotizaciones
   ID_cotizacion
@@ -212,3 +213,29 @@ La clave primaria es ID_ventas.
 La clave foranea es Precio_venta.
 Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
 
+
+#DOCUMENTACIÓN
+
+Este archivo es para presentar la documentación del desarrollo de un programa de Base de Datos para el proyecto de ARGBroker Demo. 
+Se muestra el desarrollo descriptivo de las entidades con sus respectivos atributos y relaciones pertinentes, demarcando claves primarias de cada uno y claves foráneas relacionales. 
+A continuación, se procederá a realizar una descripción detallada de las entidades que conforman este programa y aquella información que las mismas brindan a los usuarios. 
+
+Usuario/inversor: Dentro de esta entidad vamos a almacenar información relevante que respecta del inversor tal como, su nombre, email y contraseña con la que accede y se identifica al mismo en el programa. 
+
+Empresa: En este ítem se almacena la información descriptiva de la empresa, tal como Símbolo identificatorio de la empresa y nombre de la misma.
+
+Acciones: En esta entidad se encuentran almacenados aquellos datos correspondientes a la cantidad de acciones y el valor de las mismas con su respectiva fecha. 
+
+Cotizaciones: Esta entidad está conformada por aquellos datos que indican el valor de apertura y cierre de las acciones, el mínimo y máximo valor por el cual pueden operar las mismas y los precios de compra y venta con su respectiva fecha. 
+
+Portfolio: Es una entidad donde se detallan la cantidad de acciones que posee el usuario con el valor comprometido del mismo. 
+
+Stock_acciones: Esta entidad representa la cantidad de acciones que dispone un usuario dentro de su portafolio. 
+
+Cuenta: Este apartado brinda los datos referidos a los saldos iniciales y actuales que posee el usuario dentro de su cuenta.
+
+Transaccion: Esta entidad refleja los datos correspondientes a las operaciones de compra y venta que realiza el usuario con su respectiva fecha.
+
+Compra: Representa el registro de datos de las compras efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
+
+Venta: Representa el registro de datos de las ventas efectuadas a las diferentes acciones detallando cantidad y precio de las mismas con la comisión correspondiente para el Broker. 
