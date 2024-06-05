@@ -40,7 +40,7 @@
   - **Apellido:** Tita Mascarello
   - **DNI:** 39623753
   - **Correo Electrónico:** stella.tita@mi.unc.edu.ar
-  - **GitHub:** [StellaMarisTitaMascarello](https://github.com/StellaTita)
+  - **GitHub:** [StellaTita](https://github.com/StellaTita)
 
 - **Nombre:** Nicolas 
   - **Apellido:** Caceres
