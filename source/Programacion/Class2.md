@@ -1,3 +1,53 @@
+
+
+<!-- BD: corresponde a Compra y Venta -->
+**Class: Broker**
+*Attributes*
+_broker_name: string
+_broker_commission: number(float)
+
+*Méthods*
+get_broker_name(): string
+get_broker_comission(): number(float)
+
+
+**Class: Operation**
+*Attributes*
+#id_operation: string
+#quantity: number(int)
+#price: number(float)
+#commission: number(float)
+#type: string <!-- compra o venta -->
+
+*Méthods*
+_set_id_operation(): string
+_get_broker_comission(): number(float) <!-- obtiene porcentaje de comisión del broker  -->
+_set_comission(): number(float) <!-- calculo de porcentaje de la comisión sobre el precio y retorna el valor en pesos -->
+
+
+**Class: Buy**
+*Attributes*
+id_buy: string
+_summary_buy: dict 
+
+*Méthods*
+_set_id_buy(): string  <!-- modifica el id_buy con el id_operation -->
+_set_summary_buy(): dict <!-- claves y valores con id_buy + quantity, price, comission y type de superclase Operaction -->
+get_summary_buy(): dict
+
+
+**Class: Sell**
+*Attributes*
+id_sell: string
+_summary_sell: dict 
+
+*Méthods*
+_set_id_sell(): string  <!-- modifica el id_sell con el id_operation -->
+_set_summary_sell(): dict <!-- claves y valores con id_sell + quantity, price, comission y type de superclase Operaction -->
+get_summary_sell(): dict
+
+
+<!-- BD: corresponde a Transaccion -->
 **Class: Transaction** 
 *Attributes*
 id_transaction: string
@@ -16,40 +66,19 @@ _get_date(): string
 summary(): string <!-- crea un comprobante con un resumen de los datos anteriores -->
 
 
-<!-- BD: corresponde a Compra y Venta -->
 
-**Class: Operation**
-#quantity: number(int)
-#price: number(float)
-#commission: number(float)
-#type: string <!-- compra o venta -->
+<!-- BD: corresponde a Portafolio-->
+**Class: Portfolio**
+*Attributes*
+_id_portfolio: string
+_user: string
+_company_stocks: dict <!-- acciones y cantidad -->
+_committed_value: number(float)
 
 *Méthods*
-get_broker_comission(): number(float) <!-- obtiene porcentaje de comisión del broker  -->
-set_comission(): number(float) <!-- calculo de porcentaje de la comisión sobre el precio y retorna el valor en pesos -->
+get_id_portfolio(): string
+get_company_stocks(): dict
+set_company_stocks(): dict
+get_committed_value(): number(float)
 
 
-**Class: Buy** 
-*Attributes*
-id_buy: string
-
-
-
-
-Venta
-  ID_venta
-  Cant_venta
-  Precio_venta 
---- Comision_venta
-+++ Comision_broker
-
-Portafolio
-  ID_portfolio
-  ID_usuario
-  ID_acción
-  Cant_acciones
-  Valor_comprometido
-
-Broker
-	Nombre
-	Comision
