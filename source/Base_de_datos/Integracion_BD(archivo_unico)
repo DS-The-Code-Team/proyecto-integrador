@@ -132,6 +132,13 @@ Las claves foráneas son ID_empresa e ID_cotizacion.
 Relacionada con acciones (uno a muchos). Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
 Relacionada con empresa (muchos a uno). Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
 
+Accion_portafolio
+  ID_accion_portafolio
+  ID_accion
+La clave primaria es ID_accion_portafolio.
+La clave foránea es ID_accion.
+Relacionada con 
+
 Cotizaciones
   ID_cotizacion
   ID_accion
@@ -143,7 +150,7 @@ Cotizaciones
   precio_venta
   fecha_cotizacion
 La clave primaria es ID_cotizacion.
-La clave foránea es ID_acción, precio_compra y precio_venta.
+La clave foránea es ID_accion, precio_compra y precio_venta.
 Relacionada con Acciones (muchos a uno). Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción. 
 Relacionada con compras (uno a muchos) Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
 Relacionada con ventas (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
