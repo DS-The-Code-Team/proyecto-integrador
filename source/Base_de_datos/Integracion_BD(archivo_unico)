@@ -1,82 +1,85 @@
-Entidades:
-Usuario/Inversor
-Acciones
-Cotizaciones
-Transacciones
-Portafolio
-Broker
+#ENTIDADES:
+
+Usuario/Inversor.
+Acciones.
+Cotizaciones.
+Transacciones.
+Portafolio.
+Broker.
 
 Usuario/Inversor:
-ID_Usuario (clave primaria)
-ID_Portafolio (clave foránea)
-Nombre
-Saldo_Inicial
-Saldo_Actual
-Email
-Contraseña
-Tipo de Usuario (por ejemplo, cliente, empleado)
-Fecha de Registro
+ID_usuario (clave primaria)
+ID_portafolio (clave foránea)
+nombre
+saldo_inicial
+saldo_actual
+email
+contraseña
+tipo_usuario
+fecha_registro
 
 Acciones:
-ID_Accion (clave primaria)
-ID_Cotizacion (clave foránea)
-Precio_Compra
-Precio_Venta
-Cantidad_Disponible
-Apertura
-Mínimo_Diario
-Máximo_Diario
-Último_Cierre
+ID_accion (clave primaria)
+ID_cotizacion (clave foránea)
+precio_compra
+precio_venta
+cantidad_disponible
+apertura
+minimo_diario
+maximo_diario
+ultimo_cierre
 
 Empresas:
 ID_empresa
-Símbolo
-Nombre_Empresa
+simbolo
+nombre_empresa
 
 Cotizaciones:
-ID_Cotizacion (clave primaria)
-ID_Accion (clave foránea)
-Último_Operado
-Cantidad_Compra_Diaria
-Precio_Compra_Actual
-Precio_Venta_Actual
-Apertura
-Mínimo_Diario
-Máximo_Diario
-Último_Cierre
-Fecha_Cotizacion
+ID_cotizacion (clave primaria)
+ID_accion (clave foránea)
+ultimo_pperado
+cantidad_compra_diaria
+precio_compra_actual
+precio_venta_actual
+apertura
+minimo_diario
+maximo_diario
+ultimo_cierre
+fecha_cotizacion
 
 Transacciones:
-ID_Transaccion (clave primaria)
-ID_Usuario (clave foránea)
-ID_Accion (clave foránea)
+ID_transaccion (clave primaria)
+ID_usuario (clave foránea)
+ID_accion (clave foránea)
 ID_broker (clave foránea)
-Tipo_Transaccion (compra/venta)
-Cantidad
-Precio
-Fecha_Transaccion
+tipo_transaccion 
+cantidad
+precio
+fecha_transaccion
 
 Portafolio:
-ID_Portafolio (clave primaria)
-ID_Usuario (clave foránea)
-ID_Accion (clave foránea)
-Cantidad_Acciones
-Valor_Comprometido
-Ganancia_Perdida
-Saldo_Cuenta_Demo
+ID_portafolio (clave primaria)
+ID_usuario (clave foránea)
+ID_accion (clave foránea)
+cantidad_acciones
+valor_comprometido
+ganancia_perdida
+saldo_cuenta_demo
 
 Broker:
 ID_broker
-Comisión_Broker
-Nombre_broker
+comision_broker
+nombre_broker
 
+
+#RELACIONES:
 
 Usuario/Inversor - Transacciones:
 Un usuario puede realizar varias transacciones de compra y venta de acciones.
 Relación uno a muchos: Un usuario puede tener múltiples transacciones, pero una transacción pertenece a un único usuario.
 
 Acciones - Cotizaciones:
-Cada acción tiene múltiples cotizaciones a lo largo del tiempo.
+Para cada acción existen múltiples transacciones de compra y venta.
 Relación uno a muchos: Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
 
 Usuario/Inversor - Portafolio:
@@ -84,11 +87,11 @@ Cada usuario tiene un portafolio que muestra las acciones que posee.
 Relación uno a muchos: Un usuario puede tener múltiples entradas en su portafolio, pero cada entrada pertenece a un único usuario.
 
 Acciones - Transacciones:
-Las transacciones de compra y venta están relacionadas con las acciones involucradas.
+Para cada acción existen múltiples transacciones de compra y venta.
 Relación uno a muchos: Una acción puede estar involucrada en múltiples transacciones, pero cada transacción se refiere a una única acción.
 
 Empresas - Acciones:
-Empresas está relacionado con acciones ya que, cada empresa cuenta con una diversificación de acciones. 
+Cada empresa en el mercado de valores cuenta con una cartera de acciones a su disposición.
 Relación uno a muchos: Una empresa cuenta con muchas acciones a su disposición, pero cada acción corresponde a una empresa.  
 
 Broker - Transacciones
@@ -96,7 +99,7 @@ Un broker puede realizar varias transacciones de compra y venta.
 Relación uno a muchos: Un broker puede tener varias transacciones, pero una transacción de compra/venta corresponde a un broker.
 
 
-BASE DE DATOS NORMALIZADA
+#BASE DE DATOS NORMALIZADA
 
 Usuario/inversor:
   ID_usuario
@@ -106,53 +109,54 @@ Usuario/inversor:
   email
   contraseña
 La clave primaria es ID_usuario.
-Las claves foraneas son ID_portafolio y ID_cuenta
-Relacionada con Portafolio (uno a muchos) Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
-Relacionada con Cuenta (uno a muchos) Un usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
+Las claves foráneas son ID_portafolio e ID_cuenta
+Relacionada con Portafolio (uno a muchos). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
+Relacionada con Cuenta (uno a muchos). Un usuario puede tener varias cuentas, pero cada cuenta pertenece a un solo usuario.
 
 Empresa:
   ID_empresa
-  Simbolo
-  Nombre
-Clave primaria es ID_empresa
+  simbolo
+  nombre
+La clave primaria es ID_empresa.
+Relación uno a muchos: Una empresa cuenta con muchas acciones a su disposición, pero cada acción corresponde a una empresa. 
 
 Acciones:
   ID_accion
   ID_empresa
   ID_cotizacion
-  Cant_disponible
-  Valor_accion
+  cantidad_disponible
+  valor_accion
   fecha
-La clave primaria es ID_Accion.
-Las claves foraneas son ID_empresa y ID_cotizacion
-Relacionada con Cotizaciones (uno a muchos).
+La clave primaria es ID_accion.
+Las claves foráneas son ID_empresa e ID_cotizacion.
+Relacionada con acciones (uno a muchos). Una acción puede tener múltiples cotizaciones, pero una cotización pertenece a una única acción.
 Relacionada con empresa (muchos a uno). Una empresa puede tener múltiples acciones asociadas, pero cada acción pertenece a una sola empresa.
 
 Cotizaciones
   ID_cotizacion
   ID_accion
-  Apertura
-  Ultimo_cierre
-  Min_diario
-  Max_diario
-  Precio_compra
+  apertura
+  ultimo_cierre
+  min_diario
+  max_diario
+  precio_compra
   precio_venta
-  Fecha_cotizacion
+  fecha_cotizacion
 La clave primaria es ID_cotizacion.
-La clave foranea es ID_acción.
+La clave foránea es ID_acción, precio_compra y precio_venta.
 Relacionada con Acciones (muchos a uno). Cada acción puede tener varias cotizaciones, pero una cotización corresponde a una acción. 
-Se relaciona con compras (uno a muchos) una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
-Se relaciona con ventas (uno a muchos) una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
+Relacionada con compras (uno a muchos) Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+Relacionada con ventas (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
 
 
-Portfolio:
-  ID_portfolio
+Portafolio:
+  ID_portafolio
   ID_usuario
   ID_acción
-  Cant_acciones
-  Valor_comprometido
+  cantidad_acciones
+  valor_comprometido
 La clave primaria es ID_Portafolio.
-Las claves foraneas son ID_usuario, ID_acción y ID_cuenta
+Las claves foráneas son ID_usuario, ID_accion.
 Relacionada con Usuario (muchos a uno). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
 Relacionada con Acciones (muchos a muchos). Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
 
@@ -160,13 +164,13 @@ Relacionada con Acciones (muchos a muchos). Un portafolio puede contener varias 
 Cuenta:
   ID_cuenta
   ID_usuario
-  Saldo_inicial
-  Saldo_actual
-  Saldo_cuenta
-  Rentabilidad
-La clave primaria es ID_cuenta
-La clave foranea es ID_usuario
-Relacionada con usuario (muchos a uno) Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
+  saldo_inicial
+  saldo_actual
+  saldo_cuenta
+  rentabilidad
+La clave primaria es ID_cuenta.
+La clave foránea es ID_usuario.
+Relacionada con usuario (muchos a uno). Un usuario puede tener varias cuentas bancarias, pero cada cuenta bancaria pertenece a un solo usuario.
 
 Transacción:
   ID_transaccion
@@ -174,30 +178,30 @@ Transacción:
   ID_accion
   ID_compra
   ID_venta
-  Fecha_transaccion
+  fecha_transaccion
 La clave primaria es ID_transaccion.
-las claves forneas son ID_usuario, ID_accion, ID_compras, ID_ventas.
-Relacionada con usuario (muchs a uno) Un usuario puede realizar varias transacciones, pero cada transacción es realizada por un solo usuario.
-Relacionada con acción (muchos a uno) Una acción puede estar involucrada en varias transacciones, pero cada transacción involucra una sola acción.
-Relacionada con compra (uno a uno) una compra esta asociada a una transacción y una transacción a una compra
-Relacionada con venta (uno a uno) una venta esta asociada a una transacción y una transacción a una venta
+Las claves foráneas son ID_usuario, ID_accion, ID_compras, ID_ventas.
+Relacionada con usuario (muchos a uno). Un usuario puede realizar varias transacciones, pero cada transacción es realizada por un solo usuario.
+Relacionada con acción (muchos a uno). Una acción puede estar involucrada en varias transacciones, pero cada transacción involucra una sola acción.
+Relacionada con compra (uno a uno). Una compra esta asociada a una transacción y una transacción a una compra.
+Relacionada con venta (uno a uno). Una venta esta asociada a una transacción y una transacción a una venta.
 
 Compra:
   ID_compra
-  Cant_compra
-  Precio_compra
-  Comision_compra
-Clave primaria es ID_compras
-Clave foranea es Precio_compra
-Se relaciona con cotizaciones (uno a muchos) una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
+  cantidad_compra
+  precio_compra
+  comision_compra
+La clave primaria es ID_compras.
+La clave foránea es Precio_compra.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias compras, pero una compra solo correspnde a una cotización.
 
 
 Venta:
   ID_venta
-  Cant_venta
-  Precio_venta
-  Comision_venta
-Clave primaria es ID_ventas
-Calve foranea es Precio_venta
-Se relaciona con cotizaciones (uno a muchos) una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
+  cantidad_venta
+  precio_venta
+  comision_venta
+La clave primaria es ID_ventas.
+La clave foranea es Precio_venta.
+Relacionada con cotizaciones (uno a muchos). Una misma cotización puede tener varias ventas, pero una venta solo correspnde a una cotización.
 
