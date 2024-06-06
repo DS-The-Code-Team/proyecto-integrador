@@ -1,5 +1,5 @@
 
-Agregue como están detalladas en la vbase de datos, para crear las clases pueden variar algunas cosas
+Agregue como están detalladas en la base de datos, para crear las clases pueden variar algunas cosas
 
 Inversor (persona fisica » cuenta de usuario)
   ID_usuario
