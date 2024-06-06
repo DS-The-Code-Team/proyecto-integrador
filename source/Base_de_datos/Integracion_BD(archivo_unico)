@@ -161,13 +161,15 @@ Portafolio:
   ID_portafolio
   ID_usuario
   ID_acción
+  ID_accion_portafolio
   cantidad_acciones
   valor_comprometido
+    
 La clave primaria es ID_Portafolio.
-Las claves foráneas son ID_usuario, ID_accion.
+Las claves foráneas son ID_usuario, ID_accion, ID_accion_portafolio.
 Relacionada con Usuario (muchos a uno). Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
 Relacionada con Acciones (muchos a muchos). Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
-
+Relacionada con Stock_acciones (uno a uno). Un portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
 
 Cuenta:
   ID_cuenta
@@ -256,6 +258,7 @@ La entidad "Portafolio" detalla la cantidad de acciones que posee un usuario jun
 Relaciones:
 •	Relacionada con Usuario (muchos a uno): Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
 •	Relacionada con Acciones (muchos a muchos): Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
+•	Relacionada con Stock_acciones (uno a uno). Un portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
 
 
 Stock_Acciones
