@@ -5,9 +5,48 @@ Atributtes
 - id_cuenta: string
 + nombre: string
 + email: string
-- contraseña: null
++ dni: int
+methods
++ set_usuario(nombre,email,id_cuenta): dict
++ set_contraseña: string
++ _init_obtener_usuario()
 
-cuenta 
-empresa
-accion 
-cotizacion
+Class: CuentaCliente 
+Atributtes
+-id_cuenta: string 
+- id_usuario: string
+- id_portafolio: string
+- saldo_inicial: float
+- saldo_actual: float
+methods
+_invertir ()
+_ingreso_cuenta()
+_salir_cuenta()
+
+Class: Empresa
+Atributtes
+-id_empresa: string
+- nombre: string
+Methods 
+_acceso_acciones()
+
+Class: Accion
+Atributtes
+-id_accion: int
+- id_empresa: string
+- cant_disponible: float
+- valor_accion: float
+Methods
+_init_obtener_cantidad
+_obtener_valor
+
+Class: Cotizacion
+Atributtes
+-id_cotizacion: int
+- id_accion: string
+- ultimo_operando: string
+- valor_apertura: float
+- precio_compra: float
+-precio_venta: float
+Methods
++ cotizar_accion(precio_compra: string, precio_venta:string): dict
