@@ -1,4 +1,12 @@
-inversor
+Class: Investor 
+Atributtes
++ id_user: string
++ id_portafolio: string
+- id_cuenta: string
++ nombre: string
++ email: string
+- contraseña: null
+
 cuenta 
 empresa
 accion 
