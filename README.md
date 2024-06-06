@@ -1,8 +1,8 @@
 # proyecto-integrador
 
 ## Estructura de carpetas   
-**source** » trabajo diario  
-**proyecto** » commposición de los trabajos individuales
+**Aportes_alumnos** » contiene varios archivos con el trabajo diario en tareas por equipo     
+**Proyecto_entregable** » contiene un archivo único de entrega
 
 ## Integrantes del Grupo
 
