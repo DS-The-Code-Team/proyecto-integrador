@@ -1,4 +1,5 @@
 # proyecto-integrador
+Este proyecto tiene como propósito integrar los conocimientos adquiridos del módulo Programador de la carrera de Desarrollo de software del ISPC, en el contexto de la creación de una aplicación de inversiones denominada ARGBroker Demo solicitada por la empresa tecnológica ISPC Cba
 
 ## Estructura de carpetas   
 **Aportes_alumnos** » contiene varios archivos con el trabajo diario en tareas por equipo     
