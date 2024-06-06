@@ -39,8 +39,9 @@ La entidad "Portafolio" detalla la cantidad de acciones que posee un usuario jun
 **Relaciones:**
 - Relacionada con Usuario (muchos a uno): Un usuario puede tener varios portafolios, pero cada portafolio pertenece a un solo usuario.
 - Relacionada con Acciones (muchos a muchos): Un portafolio puede contener varias acciones y una acción puede estar en varios portafolios.
+- Relacionada con Stock_acciones (uno a uno): Un portafolio tiene un stock de acciones y un stock de acciones corresponde a un solo portafolio.
 
-**Stock_Acciones**
+**Stock_acciones**
 Esta entidad representa la cantidad de acciones que un usuario tiene dentro de su portafolio. La clave primaria es ID_accion_portafolio.
 
 **Relaciones:**
