@@ -1,4 +1,7 @@
-# proyecto-integrador
+# Grupo The Code Team » Proyecto integrador » ARGBroker Demo
+
+
+## Introducción
 Este proyecto tiene como propósito integrar los conocimientos adquiridos del módulo Programador de la carrera de Desarrollo de software del ISPC, en el contexto de la creación de una aplicación de inversiones denominada ARGBroker Demo solicitada por la empresa tecnológica ISPC Cba
 
 ## Estructura de carpetas   
