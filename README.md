@@ -1,14 +1,23 @@
 # Grupo The Code Team » Proyecto integrador » ARGBroker Demo
 
+### Descripción
+El proyecto ARGBroker Demo es una aplicación destinada a simular operaciones de compra y venta de acciones en 
+la Bolsa de Valores de Buenos Aires (Merval). Está diseñado para que inversores (personas físicas, empresas o 
+instituciones) puedan interactuar y realizar transacciones en un entorno de prueba.
 
-## Introducción
-Este proyecto tiene como propósito integrar los conocimientos adquiridos del módulo Programador de la carrera de Desarrollo de software del ISPC, en el contexto de la creación de una aplicación de inversiones denominada ARGBroker Demo solicitada por la empresa tecnológica ISPC Cba
+### Propósito
+Facilitar el aprendizaje y la práctica de operaciones bursátiles en un entorno seguro y controlado, brindando 
+a los usuarios herramientas y funcionalidades necesarias para gestionar sus inversiones de manera eficiente.
 
-## Estructura de carpetas   
+### Contexto
+Desarrollado en el marco del módulo Programador, este proyecto integra conocimientos y habilidades adquiridas 
+durante el curso, permitiendo a los estudiantes trabajar en equipo y aplicar prácticas de desarrollo de software profesional.
+
+### Estructura de carpetas   
 **Aportes_alumnos** » contiene varios archivos con el trabajo diario en tareas por equipo     
 **Proyecto_entregable** » contiene un archivo único de entrega
 
-## Integrantes del Grupo y distribución de equipos por tareas
+# Integrantes del Grupo y distribución de equipos por tareas
 
 ### Equipo Base de datos
 - **Nombre:** Nicolas 
