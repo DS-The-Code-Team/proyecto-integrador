@@ -6,7 +6,9 @@ from mysql.connector import errorcode
 import configparser
 import pathlib
 
-# detalle importante, todas las conexiones deben tienen cierre para tener un uso adecuado de memoria
+
+
+""" Nota: Agregado manejo de error adicional + Cierre de conexión """
 
 class DBConn:
     def __init__(self, config_file="config.ini"):
