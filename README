@@ -1,0 +1,20 @@
+## Configuración del proyecto
+
+1. Clona el repositorio.
+2. Al archivo `config.example.ini`  renómbralo a `config.ini`.
+3. Rellena los detalles de la conexión a la base de datos en `config.ini`:
+   - `user`: Tu usuario de la base de datos.
+   - `password`: Tu contraseña de la base de datos.
+   - `host`: El host de tu base de datos (e.g., `localhost`).
+   - `database`: El nombre de tu base de datos.
+
+De esta forma, vas a poder conectar el proyecto con tu base de datos local.
+
+
+## Como trabajar con ramas GitHub
+
+1. Primero verificar en que rama estas con: git branch
+2. Crea una nueva rama con tu nombre, con git checkout -b rama | por ejemplo: git checkout -b matias
+3. Fijate que estes en la nueva ram, de nuevo con: git branch
+4. Cuando termines de trabajar o hacer lo que querias, podes subir la rama al repositorio remoto usando: git push -u rama | ej: git push -u matias  
+5. Recorda antes haber usado git add . y git commit -m "mensaje"
