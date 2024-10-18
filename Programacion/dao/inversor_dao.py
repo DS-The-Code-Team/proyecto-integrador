@@ -12,12 +12,18 @@ class InversorDAO(DataAccessDAO):
         try:
             cursor = self.connection.cursor()
             query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contraseña, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contraseña, inversor.pin, inversor.saldo)
+            data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
             cursor.execute(query, data)
             self.connection.commit()
-            logging.info(f"Inversor {inversor.nombre} {inversor.apellido} registrado con exito. Bienvenido a ARGBroker")
+            
+            # retorna el id asignado al usuario
+            inversor.id = cursor.lastrowid
+            logging.info(f"Hola {inversor.nombre} {inversor.apellido} fuiste registrado con éxito en ARGBroker")
+            
+            logging.info(f"Datos de control (borrar esta línea antes de la entrega) \nID: {inversor.id}, \n CUIL: {inversor.cuil}, \n Correo: {inversor.correo}, \n contraseña: {inversor.contrasena}, \n Saldo: {inversor.saldo}")
+            
         except Exception as e:
-            logging.error(f"Error al registrar inversor: {e}")
+            logging.error(f"No se pudo realizar el registro. Error de: {e}")
         finally:
             cursor.close()
 
