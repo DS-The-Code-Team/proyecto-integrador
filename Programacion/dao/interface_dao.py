@@ -1,4 +1,3 @@
-#Este archivo define una interfaz base para todas las clases DAO. El uso de esta interfaz permite que cualquier clase que maneje datos (por ejemplo, InversorDAO) tenga una estructura consistente, lo que facilita la comprensión y el mantenimiento del código.
 from abc import ABC, abstractmethod
 
 class DataAccessDAO(ABC):
@@ -15,7 +14,7 @@ class DataAccessDAO(ABC):
         pass
 
     @abstractmethod
-    def update(self, object ):
+    def update(self, object):
         pass
 
     @abstractmethod
