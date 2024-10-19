@@ -1,15 +1,18 @@
 
 #Modelamos entidad Inversor - Usuario
 class Inversor:
-    def __init__(self, id: int, nombre: str, apellido: str, cuil: int, correo: str, contrasena: str, pin: int, saldo:float):
-        self.id = id
+    def __init__(self, nombre: str, apellido: str, cuil: int, email: str, contrasena: str, pin: int, saldo:float,  id: int = None):
         self.nombre = nombre
         self.apellido = apellido
         self.cuil = cuil
-        self.correo = correo
+        self.email = email
         self.contrasena = contrasena
         self.pin = pin
-        self.saldo = saldo      
+        self.saldo = saldo  
+        self.id = id
+
+
+    
 """     
     @staticmethod
     def registrar_inversor_view():

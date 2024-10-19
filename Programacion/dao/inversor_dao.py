@@ -51,6 +51,27 @@ class InversorDAO(DataAccessDAO):
     def delete(self, inversor):
         # Implementación para eliminar un inversor
         pass
+
+
+    """  Método login exclusivo de clase InversorDAO """
+    def login(self, correo, contrasena):
+        try:
+            cursor = self.connection.cursor()
+            query = f"SELECT * FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contraseña = %s"
+            cursor.execute(query, (correo, contrasena))
+            result = cursor.fetchone()
+            if result:
+                inversor = Inversor(*result)
+                logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
+                return inversor
+            else:
+                logging.warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
+                return None
+        except Exception as e:
+            logging.error(f"Error al intentar iniciar sesión: {e}")
+            return None
+        finally:
+            cursor.close()
      
 
 
