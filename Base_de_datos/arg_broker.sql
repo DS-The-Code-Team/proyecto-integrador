@@ -5,7 +5,7 @@ USE Arg_broker
 -- TABLA Usuarios 
 CREATE TABLE usuarios 
 (
-	id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     cuil VARCHAR (11) NOT NULL UNIQUE,
     nombre VARCHAR (50) NOT NULL,
     correo VARCHAR (100) NOT NULL UNIQUE,
@@ -18,7 +18,7 @@ CREATE TABLE usuarios
 -- TABLA Empresas
 CREATE TABLE empresas 
 (
-	id_empresa INT AUTO_INCREMENT PRIMARY KEY,
+    id_empresa INT AUTO_INCREMENT PRIMARY KEY,
     nombre_empresa VARCHAR (100) NOT NULL
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE empresas
 
 CREATE TABLE cotizacion
 (
-	id_cotizacion INT AUTO_INCREMENT PRIMARY KEY,
+    id_cotizacion INT AUTO_INCREMENT PRIMARY KEY,
     precio_compra DECIMAL (10,2) NOT NULL, 
     precio_venta DECIMAL (10,2) NOT NULL,
     fecha_cotizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
@@ -36,7 +36,7 @@ CREATE TABLE cotizacion
 
 CREATE TABLE acciones 
 (
-	id_accion INT AUTO_INCREMENT PRIMARY KEY,
+    id_accion INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT, 
     id_cotizacion INT, 
     nombre_accion VARCHAR (100) NOT NULL, 
@@ -50,7 +50,7 @@ CREATE TABLE acciones
 
 CREATE TABLE transacciones 
 (
-	id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
+    id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
     id_accion INT,
     id_cotizacion INT,
@@ -68,8 +68,8 @@ CREATE TABLE transacciones
 
 CREATE TABLE portafolio 
 (
-	id_portafolio INT AUTO_INCREMENT PRIMARY KEY,
-	id_usuario INT,
+    id_portafolio INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
     id_accion INT,
     id_cotizacion INT,
     cantidad_acciones INT NOT NULL,
