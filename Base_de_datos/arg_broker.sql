@@ -8,10 +8,11 @@ CREATE TABLE IF NOT EXISTS usuarios
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     cuil VARCHAR (11) NOT NULL UNIQUE,
     nombre VARCHAR (50) NOT NULL,
+    apellido VARCHAR (50) NOT NULL,
     correo VARCHAR (100) NOT NULL UNIQUE,
     contrasena VARCHAR (100) NOT NULL, 
     pin VARCHAR (4) NOT NULL,
-    saldo_inicial DECIMAL (15,2) DEFAULT 1000000.00,
+    saldo DECIMAL (15,2),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
 );
 
