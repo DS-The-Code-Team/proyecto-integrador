@@ -11,7 +11,7 @@ class InversorDAO(DataAccessDAO):
     def create(self, inversor):
         try:
             cursor = self.connection.cursor()
-            query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contraseña, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contrasena, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
             cursor.execute(query, data)
             self.connection.commit()
@@ -20,7 +20,7 @@ class InversorDAO(DataAccessDAO):
             inversor.id = cursor.lastrowid
             logging.info(f"Hola {inversor.nombre} {inversor.apellido} fuiste registrado con éxito en ARGBroker")
             
-            logging.info(f"Datos de control (borrar esta línea antes de la entrega) \nID: {inversor.id}, \n CUIL: {inversor.cuil}, \n Correo: {inversor.correo}, \n contraseña: {inversor.contrasena}, \n Saldo: {inversor.saldo}")
+            logging.info(f"Datos de control (borrar esta línea antes de la entrega) \nID: {inversor.id}, \n CUIL: {inversor.cuil}, \n Correo: {inversor.correo}, \n contrasena: {inversor.contrasena}, \n Saldo: {inversor.saldo}")
             
         except Exception as e:
             logging.error(f"No se pudo realizar el registro. Error de: {e}")
@@ -57,7 +57,7 @@ class InversorDAO(DataAccessDAO):
     def login(self, correo, contrasena):
         try:
             cursor = self.connection.cursor()
-            query = f"SELECT * FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contraseña = %s"
+            query = f"SELECT * FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
             cursor.execute(query, (correo, contrasena))
             result = cursor.fetchone()
             if result:
@@ -85,16 +85,16 @@ class InversorDAO(DataAccessDAO):
 # from models.inversor import Inversor
 # from config import get_db_connection
 
-# def registrar_inversor(nombre, apellido, cuil, email, contraseña, pin):
-#     inversor = Inversor(nombre, apellido, cuil, email, contraseña, pin)
+# def registrar_inversor(nombre, apellido, cuil, email, contrasena, pin):
+#     inversor = Inversor(nombre, apellido, cuil, email, contrasena, pin)
 #     connection = get_db_connection()
 #     if connection:
 #         try:
 #             cursor = connection.cursor()
 #             cursor.execute("""
-#                 INSERT INTO usuarios (cuil, nombre, apellido, correo, contraseña, pin, saldo)
+#                 INSERT INTO usuarios (cuil, nombre, apellido, correo, contrasena, pin, saldo)
 #                 VALUES (%s, %s, %s, %s, %s, %s, %s)
-#             """, (inversor.cuil, inversor.nombre, inversor.apellido, inversor.email, inversor.contraseña, inversor.pin, inversor.saldo))
+#             """, (inversor.cuil, inversor.nombre, inversor.apellido, inversor.email, inversor.contrasena, inversor.pin, inversor.saldo))
 #             connection.commit()
 #             logging.info("Inversor registrado exitosamente")
 #             return True
@@ -123,7 +123,7 @@ class InversorDAO(DataAccessDAO):
 #                     apellido=row['apellido'], 
 #                     cuil=row['cuil'], 
 #                     email=row['correo'], 
-#                     contraseña='', 
+#                     contrasena='', 
 #                     pin=0, 
 #                     saldo=row['saldo']
 #                 )
