@@ -1,22 +1,23 @@
-CREATE DATABASE Arg_broker
+CREATE DATABASE IF NOT EXISTS Arg_broker;
 
-USE Arg_broker 
+USE Arg_broker; 
 
 -- TABLA Usuarios 
-CREATE TABLE usuarios 
+CREATE TABLE IF NOT EXISTS usuarios 
 (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     cuil VARCHAR (11) NOT NULL UNIQUE,
     nombre VARCHAR (50) NOT NULL,
+    apellido VARCHAR (50) NOT NULL,
     correo VARCHAR (100) NOT NULL UNIQUE,
     contrasena VARCHAR (100) NOT NULL, 
     pin VARCHAR (4) NOT NULL,
-    saldo_inicial DECIMAL (15,2) DEFAULT 1000000.00,
+    saldo DECIMAL (15,2),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP    
 );
 
 -- TABLA Empresas
-CREATE TABLE empresas 
+CREATE TABLE IF NOT EXISTS empresas 
 (
     id_empresa INT AUTO_INCREMENT PRIMARY KEY,
     nombre_empresa VARCHAR (100) NOT NULL
@@ -24,7 +25,7 @@ CREATE TABLE empresas
 
 -- TABLA Cotizacion
 
-CREATE TABLE cotizacion
+CREATE TABLE IF NOT EXISTS cotizacion
 (
     id_cotizacion INT AUTO_INCREMENT PRIMARY KEY,
     precio_compra DECIMAL (10,2) NOT NULL, 
@@ -34,7 +35,7 @@ CREATE TABLE cotizacion
 
 -- TABLA Acciones
 
-CREATE TABLE acciones 
+CREATE TABLE IF NOT EXISTS acciones 
 (
     id_accion INT AUTO_INCREMENT PRIMARY KEY,
     id_empresa INT, 
@@ -48,7 +49,7 @@ CREATE TABLE acciones
 
 -- TABLA Transacciones
 
-CREATE TABLE transacciones 
+CREATE TABLE IF NOT EXISTS transacciones 
 (
     id_transaccion INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
@@ -66,7 +67,7 @@ CREATE TABLE transacciones
 
 -- TABLA Portafolio 
 
-CREATE TABLE portafolio 
+CREATE TABLE IF NOT EXISTS portafolio 
 (
     id_portafolio INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
