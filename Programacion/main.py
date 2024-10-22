@@ -1,11 +1,10 @@
 from dao.inversor_dao import InversorDAO
 from models.inversor import Inversor
+import time
 import logging
-
 logging.basicConfig(level=logging.INFO)
 
 #Consola, vistas:   
-
 def registrar_inversor_view():
     nombre = input("Ingrese nombre: ")
     apellido = input("Ingrese apellido: ")
@@ -26,6 +25,7 @@ def listar_inversores_view():
     for inversor in inversores:
         print(inversor)
 
+
 def login_inversor_view():
     dao = InversorDAO()
     correo = input("Ingrese su correo: ")
@@ -33,28 +33,38 @@ def login_inversor_view():
     dao.login(correo, contrasena)
 
 
+def exit_view():
+    logging.info("Saliendo...")
+    time.sleep(1)
+    quit()
 
 
-# Ejecución del menú o las vistas
 def mostrar_menu():
-    print("Seleccione una opción:")
-    print("1. Registrar inversor")
-    print("2. Listar inversores")
-    print("3. Login inversor")
-    print("4. Salir")
 
+    menu_options = {
+        "1": ("Registrar inversor", registrar_inversor_view),
+        "2": ("Listar inversores", listar_inversores_view),
+        "3": ("Login inversor", login_inversor_view),
+        "4": ("Salir", exit_view)
+    }
+    opcion = input("Ingrese una opción: ").strip('.-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')   
+    logging.info(f"Opción ingresada: {opcion}")
+
+    if opcion in menu_options:
+        descripcion, funcion = menu_options[opcion]
+        logging.info(f"Opción {opcion} seleccionada: {descripcion}")
+        if funcion:
+            funcion()
+    else:
+        logging.warning("Opción no válida seleccionada")
+        print("Opción no válida, por favor intente de nuevo.")
+
+
+# Ejecución del menú o las vistas 
 while True:
     mostrar_menu()
-    opcion = input("Ingrese una opción: ")
 
-    if opcion == "1":
-        registrar_inversor_view()
-    elif opcion == "2":
-        listar_inversores_view()
-    elif opcion == "3":
-        login_inversor_view()
-    elif opcion == "4":
-        print("Saliendo...")
-        break
-    else:
-        print("Opción no válida, por favor intente de nuevo.")
+
+       
+
+     
