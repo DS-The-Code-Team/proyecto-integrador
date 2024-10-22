@@ -1,7 +1,7 @@
 
 #Modelamos entidad Inversor - Usuario
 class Inversor:
-    def __init__(self, nombre: str, apellido: str, cuil: int, correo: str, contrasena: str, pin: int, saldo:float, id_usuario: int = None):
+    def __init__(self, nombre: str, apellido: str, cuil: int, correo: str, contrasena: str, pin: int, saldo:float, id_usuario: int = None, fecha_alta: str = None):
         self.nombre = nombre
         self.apellido = apellido
         self.cuil = cuil
@@ -10,6 +10,7 @@ class Inversor:
         self.pin = pin
         self.saldo = saldo      
         self.id = id_usuario
+        self.fecha_alta = fecha_alta
 
 """     
     @staticmethod

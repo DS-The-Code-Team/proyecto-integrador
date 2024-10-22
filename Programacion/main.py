@@ -26,6 +26,35 @@ def listar_inversores_view():
     for inversor in inversores:
         print(inversor)
 
-# Ejecución del menú o las vistas
+def login_inversor_view():
+    dao = InversorDAO()
+    correo = input("Ingrese su correo: ")
+    contrasena = input("Ingrese su contraseña: ")
+    dao.login(correo, contrasena)
 
-registrar_inversor_view()
+
+
+
+# Ejecución del menú o las vistas
+def mostrar_menu():
+    print("Seleccione una opción:")
+    print("1. Registrar inversor")
+    print("2. Listar inversores")
+    print("3. Login inversor")
+    print("4. Salir")
+
+while True:
+    mostrar_menu()
+    opcion = input("Ingrese una opción: ")
+
+    if opcion == "1":
+        registrar_inversor_view()
+    elif opcion == "2":
+        listar_inversores_view()
+    elif opcion == "3":
+        login_inversor_view()
+    elif opcion == "4":
+        print("Saliendo...")
+        break
+    else:
+        print("Opción no válida, por favor intente de nuevo.")

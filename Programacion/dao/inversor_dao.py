@@ -57,7 +57,8 @@ class InversorDAO(DataAccessDAO):
     def login(self, correo, contrasena):
         try:
             cursor = self.connection.cursor()
-            query = f"SELECT * FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
+            query = f"SELECT nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
+
             cursor.execute(query, (correo, contrasena))
             result = cursor.fetchone()
             if result:
