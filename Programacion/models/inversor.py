@@ -1,7 +1,7 @@
 
 #Modelamos entidad Inversor - Usuario
 class Inversor:
-    def __init__(self, nombre: str, apellido: str, cuil: int, correo: str, contrasena: str, pin: int, saldo:float, id_usuario: int = None, fecha_alta: str = None):
+    def __init__(self, nombre: str, apellido: str, cuil: int, correo: str, contrasena: str, pin: int, saldo:float, id_usuario: int = None, fecha_registro: str = None):
         self.nombre = nombre
         self.apellido = apellido
         self.cuil = cuil
@@ -10,7 +10,13 @@ class Inversor:
         self.pin = pin
         self.saldo = saldo      
         self.id = id_usuario
-        self.fecha_alta = fecha_alta
+        self.fecha_registro = fecha_registro
+
+    #Metodo especial __str__ para definir como se debe imprimir el objeto. Ej: print(inversor)
+    def __str__(self):
+        return f"Inversor: {self.nombre} {self.apellido}, CUIL: {self.cuil}, Correo: {self.correo}, Saldo: {self.saldo}"
+
+
 
 """     
     @staticmethod
