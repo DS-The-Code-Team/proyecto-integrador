@@ -47,7 +47,12 @@ def mostrar_menu():
         "3": ("Login inversor", login_inversor_view),
         "4": ("Salir", exit_view)
     }
-    opcion = input("Ingrese una opción: ").strip('.-abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')   
+    while True:
+        opcion = input("Ingrese una opción: ").strip()
+        if opcion.isdigit():
+            break
+        else:
+            print("Por favor, ingrese un número válido.")
     logging.info(f"Opción ingresada: {opcion}")
 
     if opcion in menu_options:
