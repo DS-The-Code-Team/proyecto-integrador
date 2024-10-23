@@ -47,6 +47,18 @@ class DBConn:
         if connection.is_connected():
             connection.close()
 
+    #Metodos especiales para el bloque with que se usara en (DAO). Esto mejora la gestión de conexiones de MySQL, siempre cerrando la conexión al terminar el bloque with.
+    def __enter__(self):
+        # Cuando se entra en el bloque `with`, se abre la conexión
+        self.connection = self.connect_to_mysql()
+        return self.connection  # El objeto que se devolverá y usará dentro del bloque
+    
+    def __exit__(self, exc_type, exc_value, traceback):
+    # Cuando se sale del bloque `with`, se cierra la conexión
+        if self.connection:
+            self.connection.close()
+
+
 
 
 """ 
