@@ -38,22 +38,19 @@ def exit_view():
     time.sleep(1)
     quit()
 
+def menu_basico(menu_titulo, menu_options):
+    msg_error = f"Opción no válida seleccionada\nPor favor intente de nuevo\n"
 
-def mostrar_menu():
+    print(menu_titulo)
+    for key, value in menu_options.items():
+        print(f"{key}: {value[0]}")
 
-    menu_options = {
-        "1": ("Registrar inversor", registrar_inversor_view),
-        "2": ("Listar inversores", listar_inversores_view),
-        "3": ("Login inversor", login_inversor_view),
-        "4": ("Salir", exit_view)
-    }
     while True:
         opcion = input("Ingrese una opción: ").strip()
         if opcion.isdigit():
             break
         else:
-            print("Por favor, ingrese un número válido.")
-    logging.info(f"Opción ingresada: {opcion}")
+            logging.warning(msg_error)
 
     if opcion in menu_options:
         descripcion, funcion = menu_options[opcion]
@@ -61,8 +58,34 @@ def mostrar_menu():
         if funcion:
             funcion()
     else:
-        logging.warning("Opción no válida seleccionada")
-        print("Opción no válida, por favor intente de nuevo.")
+        logging.warning(msg_error)
+
+def mostrar_menu():
+
+    """ 
+    
+    INSTRUCCIONES DE USO
+
+    titulo = "algo"
+    opciones = {
+        1 : ("descripcion", funcion),
+        ...
+    }
+
+    menu_basico(titulo, opciones)
+
+    """
+    
+    menu_principal_title = "Menú principal"
+    menu_principal_opciones = {
+        "1": ("Registrar inversor", registrar_inversor_view),
+        "2": ("Listar inversores", listar_inversores_view),
+        "3": ("Login inversor", login_inversor_view),
+        "4": ("Salir", exit_view)
+    }
+
+    menu_basico(menu_principal_title, menu_principal_opciones)
+    
 
 
 # Ejecución del menú o las vistas 
