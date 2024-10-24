@@ -57,10 +57,7 @@ class InversorDAO(DataAccessDAO):
             logging.error(f"Error al listar inversores: {e}")
         finally:
             cursor.close()
-
-
-
-              
+           
 
     def update(self, inversor):
         # Implementación para actualizar un inversor
