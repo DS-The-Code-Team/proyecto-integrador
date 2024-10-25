@@ -10,7 +10,7 @@ class InversorDAO(DataAccessDAO):
 
     def create(self, inversor):
         try:
-            with DBConn() as connection:  # Aquí se usa `with` para abrir y cerrar la conexión automáticamente
+            with DBConn() as connection:  
                 cursor = connection.cursor()
                 query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contrasena, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
                 data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
@@ -20,7 +20,7 @@ class InversorDAO(DataAccessDAO):
         except Exception as e:
             logging.error(f"Error al registrar inversor: {e}")
         finally:
-            cursor.close()  # Aunque la conexión se cierra automáticamente, cerramos el cursor manualmente
+            cursor.close() 
            
             
 
@@ -30,7 +30,7 @@ class InversorDAO(DataAccessDAO):
 
     def get_all(self):
         try:
-            with DBConn() as connection:  # Con `with` para manejar la conexión
+            with DBConn() as connection:  
                 cursor = connection.cursor()
                 query = f"""
                     SELECT id_usuario, cuil, nombre, apellido, correo, contrasena, pin, saldo, fecha_registro 
@@ -71,28 +71,50 @@ class InversorDAO(DataAccessDAO):
         pass
 
 
-    """  Método login exclusivo de clase InversorDAO """
-    def login(self, correo, contrasena):
+    """  Métodos exclusivos de clase InversorDAO """
+    
+    def get_login(self, correo, contrasena):
         try:
-            cursor = self.connection.cursor()
-            query = f"SELECT nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
-
-            cursor.execute(query, (correo, contrasena))
-            result = cursor.fetchone()
-            if result:
-                inversor = Inversor(*result)
-                logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
-                return inversor
-            else:
-                logging.warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
-                return None
+            with DBConn() as connection: 
+                cursor = connection.cursor()
+                query = f"SELECT nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
+                cursor.execute(query, (correo, contrasena))
+                result = cursor.fetchone()
+                if result:
+                    inversor = Inversor(*result)
+                    logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
+                    return inversor
+                else:
+                    logging.warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
+                    return None
         except Exception as e:
             logging.error(f"Error al intentar iniciar sesión: {e}")
             return None
-        finally:
-            cursor.close()
-               
-     
+
+    def get_verificar_usuario(self, correo, pin):
+        try:
+            with DBConn() as connection:  
+                cursor = connection.cursor()
+                select_query = f"SELECT correo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND pin = %s"
+                cursor.execute(select_query, (correo, pin))
+                usuario_existe = cursor.fetchone()
+
+                if not usuario_existe:
+                    return False
+                return True
+        except Exception as e:
+            logging.error(f"Error al verificar el usuario: {e}")
+
+    def set_contrasena_nueva(self, correo, contrasena_nueva):
+        try:
+            with DBConn() as connection:  
+                cursor = connection.cursor()
+                query = f"UPDATE {self.db_conn.get_database_name()}.usuarios SET contrasena = %s WHERE correo = %s"
+                cursor.execute(query, (contrasena_nueva, correo))
+                connection.commit()
+                logging.info(f"Contraseña de {correo} actualizada con éxito.")
+        except Exception as e:
+            logging.error(f"Error al intentar actualizar la contraseña: {e}")
 
 
 

@@ -2,4 +2,7 @@ Programacion/tareas
 Programacion/activate_local_env.sh
 Programacion/ref
 .venv
+.vscode
 Programacion/activate_local_env.sh
+Programacion/view/inversor_login_view.py
+Programacion/view/inversor_registrar_view.py
