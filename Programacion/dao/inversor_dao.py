@@ -77,12 +77,13 @@ class InversorDAO(DataAccessDAO):
         try:
             with DBConn() as connection: 
                 cursor = connection.cursor()
-                query = f"SELECT nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
+                query = f"SELECT id_usuario, nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
                 cursor.execute(query, (correo, contrasena))
                 result = cursor.fetchone()
+                logging.info(f"Resultado de la consulta de inicio de sesión: {result}")
                 if result:
                     inversor = Inversor(*result)
-                    logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
+                    logging.info(f"Inversor {inversor.nombre} ha iniciado sesión con éxito.")
                     return inversor
                 else:
                     logging.warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
@@ -90,6 +91,7 @@ class InversorDAO(DataAccessDAO):
         except Exception as e:
             logging.error(f"Error al intentar iniciar sesión: {e}")
             return None
+
 
     def get_verificar_usuario(self, correo, pin):
         try:
@@ -115,6 +117,34 @@ class InversorDAO(DataAccessDAO):
                 logging.info(f"Contraseña de {correo} actualizada con éxito.")
         except Exception as e:
             logging.error(f"Error al intentar actualizar la contraseña: {e}")
+
+    
+    #Metodo para mostrar resumen del inversor que inicio sesión
+    def obtener_datos_cuenta(self, inversor):
+        try:
+            with DBConn() as connection:  
+                cursor = connection.cursor()
+                # Consulta para obtener el saldo del usuario y otros datos del portafolio
+                query = """
+                SELECT u.saldo, p.valor_comprometido, p.rendimiento_operacion
+                FROM usuarios u
+                LEFT JOIN portafolio p ON u.id_usuario = p.id_usuario
+                WHERE u.id_usuario = %s
+                """
+                cursor.execute(query, (inversor,))
+                result = cursor.fetchone()
+                if result:
+                    # Procesa y devuelve los datos necesarios
+                    saldo, valor_comprometido, rendimiento_operacion = result
+                    return saldo, valor_comprometido, rendimiento_operacion
+                else:
+                    logging.warning(f"No se encontraron datos para el inversor {inversor}.")
+                    return None, None, None
+        except Exception as e:
+            logging.error(f"Error al obtener datos de la cuenta del inversor {inversor}: {e}")
+            return None, None, None
+        finally:
+            cursor.close()
 
 
 

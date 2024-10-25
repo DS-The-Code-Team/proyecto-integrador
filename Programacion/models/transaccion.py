@@ -1,18 +1,11 @@
 class Transaccion:
-    def __init__(self,
-                id_transaccion:str,
-                tipo:str,
-                cantidad:float,
-                precio_unit: float, 
-                precio_total:float, 
-                fecha:str,
-                descripcion: str):
+    def __init__(self, id_transaccion, id_usuario, id_accion, id_cotizacion, tipo_operacion, cantidad, precio_unitario, total_operacion, fecha_transaccion):
         self.id_transaccion = id_transaccion
-        self.tipo = tipo
+        self.id_usuario = id_usuario
+        self.id_accion = id_accion
+        self.id_cotizacion = id_cotizacion
+        self.tipo_operacion = tipo_operacion
         self.cantidad = cantidad
-        self.precio_unit = precio_unit
-        self.fecha = fecha
-        self.precio_total = precio_total
-        self.descripcion = descripcion
-
-    
+        self.precio_unitario = precio_unitario
+        self.total_operacion = total_operacion
+        self.fecha_transaccion = fecha_transaccion
