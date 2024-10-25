@@ -59,6 +59,10 @@ class InversorDAO(DataAccessDAO):
             cursor.close()
            
 
+
+
+              
+
     def update(self, inversor):
         # Implementación para actualizar un inversor
         pass
