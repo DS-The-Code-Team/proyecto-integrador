@@ -65,6 +65,13 @@ CREATE TABLE IF NOT EXISTS transacciones
     FOREIGN KEY (id_cotizacion) REFERENCES cotizacion (id_cotizacion)
 );
 
+
+-- AGREGADO BROKER
+CREATE TABLE IF NOT EXISTS broker (
+    broker_name VARCHAR(100) NOT NULL PRIMARY KEY UNIQUE,
+    broker_comision DECIMAL(10,1) NOT NULL
+);
+
 -- TABLA Portafolio 
 
 CREATE TABLE IF NOT EXISTS portafolio 
