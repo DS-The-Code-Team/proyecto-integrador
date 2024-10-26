@@ -95,6 +95,8 @@ class InversorDAO(DataAccessDAO):
                 logging.info(f"Datos actualizados")
         except Exception as e:
             logging.error(f"Error al intentar actualizar los datos: {e}")
+        finally:
+            cursor.close() 
 
 
     def delete(self, inversor):
@@ -108,6 +110,8 @@ class InversorDAO(DataAccessDAO):
         except Exception as e:
             logging.error(f"Error al intentar iniciar sesión: {e}")
             return None
+        finally:
+            cursor.close() 
 
 
     """  Métodos exclusivos de clase InversorDAO """
@@ -130,6 +134,8 @@ class InversorDAO(DataAccessDAO):
         except Exception as e:
             logging.error(f"Error al intentar iniciar sesión: {e}")
             return None
+        finally:
+            cursor.close() 
 
 
     def get_verificar_usuario(self, correo, pin):
@@ -145,6 +151,8 @@ class InversorDAO(DataAccessDAO):
                 return True
         except Exception as e:
             logging.error(f"Error al verificar el usuario: {e}")
+        finally:
+            cursor.close() 
 
 
     def set_contrasena_nueva(self, correo, contrasena_nueva):
@@ -157,3 +165,5 @@ class InversorDAO(DataAccessDAO):
                 logging.info(f"Contraseña de {correo} actualizada con éxito.")
         except Exception as e:
             logging.error(f"Error al intentar actualizar la contraseña: {e}")
+        finally:
+            cursor.close() 
