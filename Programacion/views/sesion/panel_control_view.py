@@ -1,4 +1,3 @@
-
 # Diseñar menú de panel control: usuario, saldo actual o inicial, transacciones, historial de transacciones, Inversiones, Portafolio, Ayuda
 from views.menu_basico_view import menu_basico_view
 from views.sesion.submenues.informacion_usuario_view import informacion_usuario_view

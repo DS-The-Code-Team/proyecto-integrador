@@ -14,7 +14,7 @@ import logging
 
 """
 
-def menu_basico_view(menu_titulo, menu_options):
+def menu_basico_view(menu_titulo, menu_options, opcionfx=None):
     msg_error = f"Opción no válida\nPor favor intente de nuevo\n"
 
     print(menu_titulo)
@@ -30,10 +30,14 @@ def menu_basico_view(menu_titulo, menu_options):
             logging.warning(msg_error)
 
     if opcion in menu_options:
-        descripcion, funcion = menu_options[opcion]
+        descripcion, funcion, *rest = menu_options[opcion]
         logging.info(f"Opción {opcion} seleccionada: {descripcion}")
         if funcion:
-            funcion()
+            if rest and opcionfx:
+                opcionfx = funcion(opcionfx)
+            else:
+                funcion()
+        
     else:
         logging.warning(msg_error)
 
