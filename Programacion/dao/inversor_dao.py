@@ -8,6 +8,7 @@ class InversorDAO(DataAccessDAO):
         self.db_conn = DBConn()
         self.connection = self.db_conn.connect_to_mysql()
     
+
     def _map_result_to_inversor(self, result):
         return Inversor(
                         id_usuario=result[0],
@@ -20,6 +21,7 @@ class InversorDAO(DataAccessDAO):
                         saldo=result[7],
                         fecha_registro=result[8]
                    )
+
 
     def create(self, inversor):
         try:
@@ -38,8 +40,8 @@ class InversorDAO(DataAccessDAO):
             
 
     def get(self, id):
-        # Implementación para obtener un inversor por ID
         pass
+
 
     def get_all(self):
         try:
@@ -52,7 +54,7 @@ class InversorDAO(DataAccessDAO):
                 cursor.execute(query)
                 results = cursor.fetchall()
                 inversores = [
-                    Inversor(
+                    """ Inversor(
                         nombre=result[2], 
                         apellido=result[3], 
                         cuil=result[1], 
@@ -62,7 +64,9 @@ class InversorDAO(DataAccessDAO):
                         saldo=result[7], 
                         id_usuario=result[0], 
                         fecha_registro=result[8]
-                     )    
+                     )     """
+
+                    self._map_result_to_inversor(result)
                     for result in results
                 ]
                 return inversores
@@ -70,19 +74,40 @@ class InversorDAO(DataAccessDAO):
             logging.error(f"Error al listar inversores: {e}")
         finally:
             cursor.close()
-           
-
-
-
-              
+            
 
     def update(self, inversor):
-        # Implementación para actualizar un inversor
-        pass
+        try:
+            with DBConn() as connection:  
+                cursor = connection.cursor()
+                data = (
+                    inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo,
+                    inversor.contrasena, inversor.pin, inversor.saldo,
+                    inversor.id_usuario
+                )
+                query = f"""
+                    UPDATE {self.db_conn.get_database_name()}.usuarios 
+                    SET nombre = %s, apellido = %s, cuil = %s, correo = %s, contrasena = %s, pin = %s
+                    WHERE id_usuario = %s
+                """
+                cursor.execute(query, (data,))
+                connection.commit()
+                logging.info(f"Datos actualizados")
+        except Exception as e:
+            logging.error(f"Error al intentar actualizar los datos: {e}")
+
 
     def delete(self, inversor):
-        # Implementación para eliminar un inversor
-        pass
+        try:
+            with DBConn() as connection: 
+                cursor = connection.cursor()
+                query = f"DELETE FROM {self.db_conn.get_database_name()}.usuarios WHERE id_usuario = %s"
+                cursor.execute(query, (inversor.id_usuario,))
+                connection.commit()
+                logging.info(f"Inversor {inversor.nombre} {inversor.apellido} eliminado con éxito.")
+        except Exception as e:
+            logging.error(f"Error al intentar iniciar sesión: {e}")
+            return None
 
 
     """  Métodos exclusivos de clase InversorDAO """
@@ -106,6 +131,7 @@ class InversorDAO(DataAccessDAO):
             logging.error(f"Error al intentar iniciar sesión: {e}")
             return None
 
+
     def get_verificar_usuario(self, correo, pin):
         try:
             with DBConn() as connection:  
@@ -120,6 +146,7 @@ class InversorDAO(DataAccessDAO):
         except Exception as e:
             logging.error(f"Error al verificar el usuario: {e}")
 
+
     def set_contrasena_nueva(self, correo, contrasena_nueva):
         try:
             with DBConn() as connection:  
@@ -130,63 +157,3 @@ class InversorDAO(DataAccessDAO):
                 logging.info(f"Contraseña de {correo} actualizada con éxito.")
         except Exception as e:
             logging.error(f"Error al intentar actualizar la contraseña: {e}")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Metodos sin with:
-
-#  def create(self, inversor):
-#         try:
-#             cursor = self.connection.cursor()
-#             query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contrasena, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-#             data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
-#             cursor.execute(query, data)
-#             self.connection.commit()
-            
-#             # retorna el id asignado al usuario
-#             inversor.id = cursor.lastrowid
-#             logging.info(f"Hola {inversor.nombre} {inversor.apellido} fuiste registrado con éxito en ARGBroker")
-            
-#             logging.info(f"Datos de control (borrar esta línea antes de la entrega) \nID: {inversor.id}, \n CUIL: {inversor.cuil}, \n Correo: {inversor.correo}, \n contrasena: {inversor.contrasena}, \n Saldo: {inversor.saldo}")
-            
-#         except Exception as e:
-#             logging.error(f"No se pudo realizar el registro. Error de: {e}")
-#         finally:
-#             cursor.close()
-
-#   def create(self, inversor):
-#         try:
-#             cursor = self.connection.cursor()
-#             query = f"INSERT INTO {self.db_conn.get_database_name()}.usuarios (nombre, apellido, cuil, correo, contrasena, pin, saldo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-#             data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
-#             cursor.execute(query, data)
-#             self.connection.commit()
-            
-#             # retorna el id asignado al usuario
-#             inversor.id = cursor.lastrowid
-#             logging.info(f"Hola {inversor.nombre} {inversor.apellido} fuiste registrado con éxito en ARGBroker")
-            
-#             logging.info(f"Datos de control (borrar esta línea antes de la entrega) \nID: {inversor.id}, \n CUIL: {inversor.cuil}, \n Correo: {inversor.correo}, \n contrasena: {inversor.contrasena}, \n Saldo: {inversor.saldo}")
-            
-#         except Exception as e:
-#             logging.error(f"No se pudo realizar el registro. Error de: {e}")
-#         finally:
-#             cursor.close()           
-            
-
-
-
-
-
-
