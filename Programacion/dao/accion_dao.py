@@ -1,9 +1,9 @@
 from dao.interface_dao import DataAccessDAO
-from models.inversor import Inversor
+from models.accion import Accion
 from utils.db_conn import DBConn
 import logging
 
-class InversorDAO(DataAccessDAO):
+class AccionDAO(DataAccessDAO):
     def __init__(self):
         self.db_conn = DBConn()
         self.connection = self.db_conn.connect_to_mysql()
@@ -16,7 +16,7 @@ class InversorDAO(DataAccessDAO):
                 cursor.execute(query, (id,))
                 result = cursor.fetchone()
                 if result:
-                    accion = result
+                    accion = Accion(*result)
                     return accion
                 else:
                     return None
@@ -34,7 +34,7 @@ class InversorDAO(DataAccessDAO):
                 query = "SELECT * FROM acciones"
                 cursor.execute(query)
                 results = cursor.fetchall()
-                acciones = [*results]
+                acciones = Accion(*results)
                 return acciones
         except Exception as e:
             logging.error(f"Error al buscar las acciones: {e}")

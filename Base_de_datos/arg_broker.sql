@@ -87,3 +87,6 @@ CREATE TABLE IF NOT EXISTS portafolio
     FOREIGN KEY (id_accion) REFERENCES acciones (id_accion),
     FOREIGN KEY (id_cotizacion) REFERENCES cotizacion (id_cotizacion)
 );
+
+
+    
