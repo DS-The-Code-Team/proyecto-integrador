@@ -1,6 +1,6 @@
 #Crear interfaz para recuperar la contraseña (Email, PIN) (confirmar contraseña nueva)
 from dao.inversor_dao import InversorDAO
-from view.menu_basico_view import menu_basico_view
+from views.menu_basico_view import menu_basico_view
 
 def recuperar_contrasena():
     dao = InversorDAO()
@@ -35,5 +35,5 @@ recuperar_menu = {
     "2": ("Volver al menú principal", None)
 }
 
-def recuperar_contrasena_view():
+def inversor_recuperar_contrasena_view():
     menu_basico_view("Quiero recuperar mi contraseña", recuperar_menu)

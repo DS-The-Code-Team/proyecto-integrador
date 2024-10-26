@@ -1,3 +1,17 @@
+## Variables globales
+1. Importar modulo
+            import os
+
+2. Variables disponibles
+            os.getenv('id_inversor')
+            os.getenv('nombre_inversor')
+            os.getenv('apellido_inversor')
+            os.getenv('saldo_inversor')
+            os.getenv('correo_inversor')
+            os.getenv('pin_inversor')
+            os.getenv('cuil_inversor')
+            os.getenv('fecha_registro_inversor')
+
 ## Configuración del proyecto
 
 1. Clona el repositorio.

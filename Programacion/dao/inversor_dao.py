@@ -7,6 +7,19 @@ class InversorDAO(DataAccessDAO):
     def __init__(self):
         self.db_conn = DBConn()
         self.connection = self.db_conn.connect_to_mysql()
+    
+    def _map_result_to_inversor(self, result):
+        return Inversor(
+                        id_usuario=result[0],
+                        nombre=result[1],
+                        apellido=result[2],
+                        cuil=result[3],
+                        correo=result[4],
+                        contrasena=result[5],
+                        pin=result[6],
+                        saldo=result[7],
+                        fecha_registro=result[8]
+                   )
 
     def create(self, inversor):
         try:
@@ -78,11 +91,12 @@ class InversorDAO(DataAccessDAO):
         try:
             with DBConn() as connection: 
                 cursor = connection.cursor()
-                query = f"SELECT nombre, apellido, cuil, correo, contrasena, pin, saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
+                query = f"SELECT id_usuario, nombre, apellido, cuil, correo, contrasena, pin, saldo, fecha_registro FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
                 cursor.execute(query, (correo, contrasena))
                 result = cursor.fetchone()
+                print(result)
                 if result:
-                    inversor = Inversor(*result)
+                    inversor = self._map_result_to_inversor(result)
                     logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
                     return inversor
                 else:
