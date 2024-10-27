@@ -23,7 +23,7 @@ def inversor_login_view():
         user = login(dao, intentos_maximos)
 
         if user:    
-            # variables de entorno
+            # Creamos las variables de entorno
             os.environ['id_inversor'] = str(user.id_usuario)
             os.environ['nombre_inversor'] = user.nombre
             os.environ['apellido_inversor'] = user.apellido
