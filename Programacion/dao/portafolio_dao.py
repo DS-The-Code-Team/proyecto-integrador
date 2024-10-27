@@ -16,7 +16,14 @@ class PortafolioDAO(DataAccessDAO):
                 cursor.execute(query, (id,))
                 result = cursor.fetchone()
                 if result:
-                    portafolio = Portafolio(*result)
+                    portafolio = Portafolio(
+                        id_usuario=result[1],
+                        id_accion=result[2],
+                        cantidad_acciones=result[3],
+                        valor_comprometido=result[4],
+                        rendimiento_operacion=result[5],
+                        id_portafolio=result[0]
+                    )
                     return portafolio
                 else:
                     return None
@@ -39,7 +46,7 @@ class PortafolioDAO(DataAccessDAO):
                 data = (portafolio.id_usuario, portafolio.id_accion, portafolio.cantidad_acciones, portafolio.valor_comprometido, portafolio.rendimiento_operacion)
                 cursor.execute(query, data)
                 connection.commit()
-                logging.info(f"Potafolio creado con éxito.")
+                logging.info(f"Portafolio creado con éxito.")
         except Exception as e:
             logging.error(f"Error al crear portafolio: {e}")
         finally:

@@ -7,9 +7,10 @@ def crear_portafolio():
     id_usuario = int(os.getenv("id_inversor"))
     print(f"Creando portafolio para el usuario con id: {id_usuario}")
     
-    portafolio = Portafolio(id_usuario, None, 0, 0, 0)
+    portafolio = Portafolio(id_usuario, 0, 0, 0, 0)
     dao = PortafolioDAO()
     dao.create(portafolio)
+
 
 def get_portafolio(id_usuario):
     dao = PortafolioDAO()
@@ -23,11 +24,15 @@ def portafolio_view():
     portafolio = get_portafolio(id_usuario)
     if portafolio:
         print(f"""
-        Portafolio:{portafolio}
+              Portafolio: {portafolio.id_portafolio}
+              Usuario: {portafolio.id_usuario}
+              Acciones: {portafolio.id_accion}
+              Cantidad total: {portafolio.cantidad_acciones}
+              Valor comprometido: {portafolio.valor_comprometido}
+              Rendimiento de las operaciones: {portafolio.rendimiento_operacion}
         """)
     else:
-        portafolio = crear_portafolio()
-        print("Portafolio creado con éxito.")
+        portafolio = crear_portafolio()       
         portafolio = get_portafolio(id_usuario)
         print(f"""
         Portafolio:{portafolio}
