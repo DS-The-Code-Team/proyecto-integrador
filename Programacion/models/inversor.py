@@ -9,12 +9,12 @@ class Inversor:
         self.contrasena = contrasena
         self.pin = pin
         self.saldo = saldo      
-        self.id = id_usuario
+        self.id_usuario = id_usuario
         self.fecha_registro = fecha_registro
 
     #Metodo especial __str__ para definir como se debe imprimir el objeto. Ej: print(inversor)
     def __str__(self):
-        return f"Inversor: {self.nombre} {self.apellido}, CUIL: {self.cuil}, Correo: {self.correo}, Saldo: {self.saldo}"
+        return f"Control de datos: id:{self.id_usuario}, nombre y apellido: {self.nombre} {self.apellido}, CUIL: {self.cuil}, Correo: {self.correo}, Saldo: {self.saldo},Inicio: {self.fecha_registro}"
 
 
 
