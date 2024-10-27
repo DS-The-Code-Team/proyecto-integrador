@@ -1,31 +1,21 @@
-from dao.inversor_dao import InversorDAO
-from models.inversor import Inversor
-import logging
+from views.menu_inicio.menu_principal_view import mostrar_menu_principal_view
+from views.sesion.pantalla_principal_view import sesion_pantalla_principal_view
+import os
 
-logging.basicConfig(level=logging.INFO)
+if __name__ == "__main__":  
+    def usuario_existe():
+        usuario = os.getenv("id_inversor")
+        return usuario
+    
+    while True:
+        usuario_logueado = usuario_existe()
+        if not usuario_logueado: 
+            mostrar_menu_principal_view()
+        else:
+            sesion_pantalla_principal_view()
 
-#Consola, vistas:   
 
-def registrar_inversor_view():
-    nombre = input("Ingrese nombre: ")
-    apellido = input("Ingrese apellido: ")
-    cuil = input("Ingrese CUIL: ")
-    correo = input("Ingrese email: ")
-    contraseña = input("Ingrese contraseña: ")
-    pin = input("Ingrese pin: ")
-    saldo = 1000000
 
-    inversor = Inversor(nombre, apellido, cuil, correo, contraseña, pin, saldo)
-    dao = InversorDAO()
-    dao.create(inversor)
-  
+       
 
-def listar_inversores_view():
-    dao = InversorDAO()
-    inversores = dao.get_all()
-    for inversor in inversores:
-        print(inversor)
-
-# Ejecución del menú o las vistas
-
-registrar_inversor_view()
+     

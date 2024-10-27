@@ -59,12 +59,14 @@ CREATE TABLE IF NOT EXISTS transacciones
     cantidad INT NOT NULL,
     precio_unitario DECIMAL (10,2) NOT NULL,
     total_operacion DECIMAL (15,2) NOT NULL,
+    broker_comision DECIMAL(10,1) DEFAULT 1.5,
     fecha_transaccion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	broker_comision DECIMAL(10,1) DEFAULT 1.5 NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario),
     FOREIGN KEY (id_accion) REFERENCES acciones (id_accion),
     FOREIGN KEY (id_cotizacion) REFERENCES cotizacion (id_cotizacion)
 );
+
 
 -- TABLA Portafolio 
 
@@ -79,3 +81,6 @@ CREATE TABLE IF NOT EXISTS portafolio
     FOREIGN KEY (id_usuario) REFERENCES usuarios (id_usuario),
     FOREIGN KEY (id_accion) REFERENCES acciones (id_accion)
 );
+
+
+    

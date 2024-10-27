@@ -1,3 +1,17 @@
+## Variables globales
+1. Importar modulo
+            import os
+
+2. Variables disponibles
+            os.getenv('id_inversor')
+            os.getenv('nombre_inversor')
+            os.getenv('apellido_inversor')
+            os.getenv('saldo_inversor')
+            os.getenv('correo_inversor')
+            os.getenv('pin_inversor')
+            os.getenv('cuil_inversor')
+            os.getenv('fecha_registro_inversor')
+
 ## Configuración del proyecto
 
 1. Clona el repositorio.
@@ -8,9 +22,9 @@
    - `host`: El host de tu base de datos (e.g., `localhost`).
    - `database`: El nombre de tu base de datos.
 
+
+
 De esta forma, vas a poder conectar el proyecto con tu base de datos local.
-
-
 ## Como trabajar con ramas GitHub
 
 1. Primero verificar en que rama estas con: git branch

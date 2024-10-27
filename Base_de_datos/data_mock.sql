@@ -1,5 +1,4 @@
 
--- Insertar un usuario
 INSERT INTO usuarios (id_usuario, cuil, nombre, apellido, correo, contrasena, pin, saldo, fecha_registro) VALUES
 ('1', '20348537808', 'Juan', 'Cabalango', 'juancabalango01@gmail.com', '12345', '345', 1000000.00,'2024-05-20 10:54:34'),
 ('2','23234567281', 'Ariel', 'Marquez',  'marquezariel@outlook.com', '37582', '582', 1000000.00, '2024-07-21 11:24:54'),
