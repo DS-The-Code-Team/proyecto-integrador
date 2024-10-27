@@ -6,7 +6,14 @@ import os
 
 
 def comprar_acciones_view():
-    while True:  
+    while True:
+
+        # Preguntar al usuario si comprar vender o salir
+        continuar = input("¿Desea comprar acciones? (s para continuar, n para volver atrás): ")
+        if continuar.lower() != 's':
+            print("Volviendo al menú anterior...")
+            return  # Regresar sin hacer nada
+        
         # Obtenemos datos de usuario de las variables de entorno
         id_usuario = os.getenv('id_inversor')
         saldo_usuario = os.getenv('saldo_inversor')
@@ -52,8 +59,8 @@ def comprar_acciones_view():
 def vender_acciones_view():
     while True:  #Bucle para gestionar decisiones de usuario
 
-        # Preguntar al usuario si quiere comprar o salir
-        continuar = input("¿Desea comprar acciones? (s para continuar, n para volver atrás): ")
+        # Preguntar al usuario si quiere vender o salir
+        continuar = input("¿Desea vender acciones? (s para continuar, n para volver atrás): ")
         if continuar.lower() != 's':
             print("Volviendo al menú anterior...")
             return  # Regresar sin hacer nada
