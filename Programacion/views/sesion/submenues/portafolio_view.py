@@ -7,7 +7,7 @@ def crear_portafolio():
     id_usuario = int(os.getenv("id_inversor"))
     print(f"Creando portafolio para el usuario con id: {id_usuario}")
     
-    portafolio = Portafolio(id_usuario, 0, 0, 0, 0)
+    portafolio = Portafolio(id_usuario, None, 0, 0, 0)
     dao = PortafolioDAO()
     dao.create(portafolio)
 
