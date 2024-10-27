@@ -54,7 +54,7 @@ class InversorDAO(DataAccessDAO):
                 cursor.execute(query)
                 results = cursor.fetchall()
                 inversores = [
-                    """ Inversor(
+                    Inversor(
                         nombre=result[2], 
                         apellido=result[3], 
                         cuil=result[1], 
@@ -64,9 +64,9 @@ class InversorDAO(DataAccessDAO):
                         saldo=result[7], 
                         id_usuario=result[0], 
                         fecha_registro=result[8]
-                     )     """
+                     )     
 
-                    self._map_result_to_inversor(result)
+                    # Inversor(self._map_result_to_inversor(result))
                     for result in results
                 ]
                 return inversores

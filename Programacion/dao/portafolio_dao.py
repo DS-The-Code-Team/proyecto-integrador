@@ -12,7 +12,7 @@ class PortafolioDAO(DataAccessDAO):
         try:
             with DBConn() as connection:
                 cursor = connection.cursor()
-                query = "SELECT * FROM portafolio WHERE id_portafolio = %s"
+                query = "SELECT * FROM portafolio WHERE id_usuario = %s"
                 cursor.execute(query, (id,))
                 result = cursor.fetchone()
                 if result:
@@ -35,15 +35,16 @@ class PortafolioDAO(DataAccessDAO):
         try:
             with DBConn() as connection:  
                 cursor = connection.cursor()
-                query = f"INSERT INTO {self.db_conn.get_database_name()}.portafolio (id_usuario) VALUES (%s)"
-                data = portafolio.id_usuario
+                query = f"INSERT INTO {self.db_conn.get_database_name()}.portafolio (id_usuario, id_accion, cantidad_acciones, valor_comprometido, rendimiento_operacion) VALUES (%s, %s, %s, %s, %s)"
+                data = (portafolio.id_usuario, portafolio.id_accion, portafolio.cantidad_acciones, portafolio.valor_comprometido, portafolio.rendimiento_operacion)
                 cursor.execute(query, data)
                 connection.commit()
                 logging.info(f"Potafolio creado con éxito.")
         except Exception as e:
             logging.error(f"Error al crear portafolio: {e}")
         finally:
-            cursor.close() 
+            cursor.close()
+
 
    
     def update(self, portafolio):
@@ -54,14 +55,13 @@ class PortafolioDAO(DataAccessDAO):
                         portafolio.id_portafolio,
                         portafolio.id_usuario,
                         portafolio.id_accion,
-                        portafolio.id_cotizacion,
                         portafolio.cantidad_acciones,
                         portafolio.valor_comprometido,
                         portafolio.rendimiento_operacion
                     )
                 query = f"""
                     UPDATE {self.db_conn.get_database_name()}.portafolio 
-                    SET id_accion = %s, id_cotizacion = %s, cantidad_acciones = %s, valor_comprometido = %s, rendimiento_operacion = %s
+                    SET id_accion = %s, cantidad_acciones = %s, valor_comprometido = %s, rendimiento_operacion = %s
                     WHERE id_usuario = %s AND id_portafolio = %s
                 """
                 cursor.execute(query, (data,))

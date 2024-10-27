@@ -79,7 +79,6 @@ CREATE TABLE IF NOT EXISTS portafolio
     id_portafolio INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT,
     id_accion INT,
-    id_cotizacion INT,
     cantidad_acciones INT NOT NULL,
     valor_comprometido DECIMAL (15,2) NOT NULL,
     rendimiento_operacion DECIMAL (15,2) NOT NULL,
