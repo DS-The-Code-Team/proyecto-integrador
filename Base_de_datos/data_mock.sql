@@ -37,7 +37,7 @@ INSERT INTO cotizacion (id_cotizacion, precio_compra, precio_venta, fecha_cotiza
 ('10', '7765.99', '7754.82', '2024-10-25 11:10:45');
 
 
-INSERT INTO acciones (id_accion, id_empresa, id_cotizacion, nombre_accion, precio_historico, fecha_actualzacion)
+INSERT INTO acciones (id_accion, id_empresa, id_cotizacion, nombre_accion, precio_historico, fecha_actualizacion)
 VALUES 
 ('1' ,'1' ,'1' ,'Accion_Arcor', 800.00, '2024-10-20 11:11:59'),
 ('2' ,'2' ,'2' ,'Accion_Google', 900.00, '2024-10-20 11:11:59'),
