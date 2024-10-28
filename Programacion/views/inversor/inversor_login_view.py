@@ -1,5 +1,4 @@
 from dao.inversor_dao import InversorDAO
-from views.sesion.pantalla_principal_view import sesion_pantalla_principal_view
 import os
 
 def login(dao, intentos_maximos):
@@ -34,7 +33,6 @@ def inversor_login_view():
             os.environ['fecha_registro_inversor'] = str(user.fecha_registro)
             return  
 
-            # sesion_pantalla_principal_view()
         
         else:
             print(f"Se ha excedido el número de intentos para iniciar sesión.\n")

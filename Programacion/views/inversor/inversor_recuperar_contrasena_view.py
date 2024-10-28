@@ -1,4 +1,3 @@
-#Crear interfaz para recuperar la contraseña (Email, PIN) (confirmar contraseña nueva)
 from dao.inversor_dao import InversorDAO
 from views.menu_basico_view import menu_basico_view
 

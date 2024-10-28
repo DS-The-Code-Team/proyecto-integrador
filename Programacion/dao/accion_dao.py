@@ -35,7 +35,7 @@ class AccionDAO(DataAccessDAO):
                 query = "SELECT * FROM acciones"
                 cursor.execute(query)
                 results = cursor.fetchall()
-                acciones = [Accion(*result) for result in results]  #Devolver lista de acciones
+                acciones = [Accion(*result) for result in results] 
                 return acciones
         except Exception as e:
             logging.error(f"Error al buscar las acciones: {e}")
@@ -60,21 +60,21 @@ class AccionDAO(DataAccessDAO):
     
 
     def get_precios_de_acciones(self):
-        cursor = None  # Inicializar cursor en None
+        cursor = None  
         try:
             with DBConn() as connection:
-                cursor = connection.cursor()  # Aquí creas el cursor
+                cursor = connection.cursor()  
                 cursor.execute(""" 
                     SELECT a.id_accion, a.nombre_accion, c.precio_compra
                     FROM acciones a
                     JOIN cotizacion c ON a.id_cotizacion = c.id_cotizacion
                 """)
-                return cursor.fetchall()  # Retorna una lista de tuplas (id_accion, nombre_accion, precio_compra)
+                return cursor.fetchall()  
         except Exception as e:
             logging.error(f"Error al obtener precios de acciones: {e}")
             return []
         finally:
-            if cursor:  # Solo cerrarlo si fue inicializado
+            if cursor: 
                 cursor.close()
 
     
@@ -87,6 +87,6 @@ class AccionDAO(DataAccessDAO):
                     JOIN acciones a ON p.id_accion = a.id_accion 
                     WHERE p.id_usuario = %s
                 """, (id_usuario,))
-                return cursor.fetchall()  # Devolver todas las acciones y cantidades en el portafolio
+                return cursor.fetchall()  
 
         
