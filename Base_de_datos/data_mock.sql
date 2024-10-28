@@ -1,3 +1,4 @@
+
 INSERT INTO usuarios (id_usuario, cuil, nombre, apellido, correo, contrasena, pin, saldo, fecha_registro) VALUES
 ('1', '20348537808', 'Juan', 'Cabalango', 'juancabalango01@gmail.com', '12345', '345', 1000000.00,'2024-05-20 10:54:34'),
 ('2','23234567281', 'Ariel', 'Marquez',  'marquezariel@outlook.com', '37582', '582', 1000000.00, '2024-07-21 11:24:54'),
@@ -9,7 +10,6 @@ INSERT INTO usuarios (id_usuario, cuil, nombre, apellido, correo, contrasena, pi
 ('8','27479227324', 'Lisa', 'Mandorian',  'lisamandorian2011@gmail.com', '37459', '459', 1000000.00, '2024-02-22 06:23:34'),
 ('9','20383446331', 'Federico', 'Prado',  'fedeprado@gmail.com', '85432', '432', 1000000.00, '2024-01-31 11:54:34'),
 ('10','23157383325', 'Ana', 'Lobos',  'ana_lobos.01@gmail.com', '47384', '384', 1000000.00, '2024-09-19 05:22:07');
-
 
 INSERT INTO empresas (id_empresa, nombre_empresa) VALUES 
 ('1', 'Arcor'), 
@@ -23,7 +23,6 @@ INSERT INTO empresas (id_empresa, nombre_empresa) VALUES
 ('9', 'YPF'), 
 ('10', 'Grupo Superville');
 
-
 INSERT INTO cotizacion (id_cotizacion, precio_compra, precio_venta, fecha_cotizacion) VALUES 
 ('1', '824.82', '822.82', '2024-10-25 11:10:45'),
 ('2', '934.35', '925.77', '2024-10-25 11:10:45'),
@@ -35,7 +34,6 @@ INSERT INTO cotizacion (id_cotizacion, precio_compra, precio_venta, fecha_cotiza
 ('8', '67734.00', '67687.00', '2024-10-25 11:10:45'),
 ('9', '223.82', '213.82', '2024-10-25 11:10:45'),
 ('10', '7765.99', '7754.82', '2024-10-25 11:10:45');
-
 
 INSERT INTO acciones (id_accion, id_empresa, id_cotizacion, nombre_accion, precio_historico, fecha_actualizacion)
 VALUES 
@@ -50,25 +48,53 @@ VALUES
 ('9' ,'9' ,'9' ,'Accion_YPF', 200.00, '2024-10-20 11:11:59'),
 ('10' ,'10' ,'10' ,'Accion_GrupoSuperville', 7700.00, '2024-10-20 11:11:59');
 
+INSERT INTO transacciones (id_transaccion, id_usuario, id_accion, id_cotizacion, tipo_operacion, cantidad, precio_unitario, total_operacion, broker_comision, fecha_transaccion)
+VALUES
+('1', '1', '1', '1', 'compra', 50, 822.82, 41141.00, 1.5, '2024-10-25 11:10:45'),
+('2', '1', '2', '2', 'compra', 30, 925.77, 27773.10, 1.5, '2024-10-26 11:10:45'),
+('3', '2', '3', '3', 'venta', 20, 1124.56, 22491.20, 1.5, '2024-10-26 12:15:30'),
+('4', '3', '4', '4', 'compra', 10, 2825.78, 28257.80, 1.5, '2024-10-27 09:00:00'),
+('5', '4', '5', '5', 'venta', 5, 5658.35, 28291.75, 1.5, '2024-10-27 10:05:15');
 
-INSERT INTO transacciones (id_usuario, id_accion, id_cotizacion, tipo_operacion, cantidad, precio_unitario, total_operacion) VALUES
-('1' ,'1' ,'1' ,'compra' , '9' , '824.82' ,'7423.38'),
-('1' ,'2' ,'2' ,'compra' , '12', '934.35','11212.20'),
-('3' ,'3' ,'3' ,'compra' , '24' , '1134.23', '27221.52'),
-('3' ,'4' ,'4' ,'compra' , 35, '2845.78', '99602.30'),
-('6' ,'5' ,'5' ,'compra' , 49, '5678.55', '278248.95');
+INSERT INTO portafolio (id_portafolio, id_usuario, id_accion, cantidad_acciones, valor_comprometido, rendimiento_operacion) VALUES 
+('1', '1', '1', 50, 41141.00, 1000.00), 
+('2', '1', '2', 30, 27773.10, 500.00),
+('3', '2', '3', 20, 22491.20, 800.00),
+('4', '3', '4', 10, 28257.80, 1200.00),
+('5', '4', '5', 5, 28291.75, 600.00);
+
+-- Consultas UPDATE
+UPDATE usuarios SET saldo = saldo + 5000.00 WHERE id_usuario = 1;
+UPDATE empresas SET nombre_empresa = 'Grupo Arcor' WHERE id_empresa = 1;
+UPDATE cotizacion SET precio_compra = 830.00 WHERE id_cotizacion = 1;
+UPDATE acciones SET precio_historico = 820.00 WHERE id_accion = 1;
+UPDATE transacciones SET total_operacion = total_operacion * 1.02 WHERE id_transaccion = 1;
+
+-- Consultas SELECT
+SELECT * FROM usuarios;
+SELECT * FROM empresas;
+SELECT * FROM cotizacion;
+SELECT * FROM acciones;
+SELECT * FROM transacciones;
+
+-- Consultas Multitabla
+
+-- Queremos conocer el historial de transacciones del usuario con ID 1 para evaluar su rendimiento.
+SELECT t.id_transaccion, t.tipo_operacion, t.cantidad, t.precio_unitario, t.total_operacion, a.nombre_accion 
+FROM transacciones t 
+JOIN acciones a ON t.id_accion = a.id_accion 
+WHERE t.id_usuario = 1;
 
 
-INSERT INTO transacciones (id_usuario, id_accion, id_cotizacion, tipo_operacion, cantidad, precio_unitario, total_operacion) VALUES
-('2' ,'6' ,'6' ,'venta', '12' , '10405.23', '124862.76'),
-('2' ,'7' ,'7' ,'venta', '34' , '9212.34', '313219.56'),
-('5' ,'8' ,'8' ,'venta' , '8', '67867.00', '542936.00'),
-('7' ,'9' ,'9' ,'venta' , '17', '213.82', '3634.94'),
-('9' ,'10' ,'10' ,'venta' , '22', '7754.82', '170606.04');
+-- Queremos saber el saldo y las acciones en el portafolio de cada usuario.
+SELECT u.nombre, u.apellido, u.saldo, a.nombre_accion, p.cantidad_acciones 
+FROM usuarios u 
+JOIN portafolio p ON u.id_usuario = p.id_usuario 
+JOIN acciones a ON p.id_accion = a.id_accion;
 
-INSERT INTO portafolio (id_usuario, id_accion, id_cotizacion, cantidad_acciones, valor_comprometido, rendimiento_operacion) VALUES
-('1', '1', '1', '9', '8000.00', '8465.00'),
-('1', '2', '2','12', '12000.00', '384755.00'),
-('1','3','3','10', '12000.00', '1823263.00'),
-('1','4','4','33', '96000.00', '28324463.00'),
-('1','5','5','46', '263000.00', '57383.00');
+
+-- Queremos calcular el rendimiento total de las transacciones de cada usuario para evaluar su desempeño en el mercado.
+SELECT u.nombre, u.apellido, SUM(t.total_operacion) AS rendimiento_total 
+FROM usuarios u 
+JOIN transacciones t ON u.id_usuario = t.id_usuario 
+GROUP BY u.id_usuario;
