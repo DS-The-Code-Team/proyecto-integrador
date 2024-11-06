@@ -38,7 +38,8 @@ def __portafolio_accion_cantidad_precio(id_accion, acciones):
     accion = acciones[position]
     seleccionado_precio = accion[3]
     seleccionado_cantidad = accion[2]
-    return seleccionado_precio, seleccionado_cantidad
+    seleccionado_nombre = accion[1]
+    return seleccionado_precio, seleccionado_cantidad, seleccionado_nombre
 
             
 
@@ -194,28 +195,27 @@ def vender_acciones_view():
         
         print("Acciones disponibles en su portafolio:")
         for id_accion, nombre_accion, cantidad_acciones, valor_comprometido, rendimiento_operacion in acciones_portafolio:
-            print(f"ID accion: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}, Valor comprometido: ${valor_comprometido}, Rendimiento de las operaciones: {rendimiento_operacion}") 
+            print(f"Nro. accion: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}, Valor comprometido: ${valor_comprometido}, Rendimiento de las operaciones: {rendimiento_operacion}") 
         print("") 
           
-        id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea vender: ",acciones_portafolio)
+        id_accion = __validacion_input_numero("Ingrese el número de la acción que desea vender: ",acciones_portafolio)
         cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea vender: ")
 
       
 
-        accion_venta_precio, accion_venta_cantidad = __portafolio_accion_cantidad_precio(id_accion, acciones_portafolio)
+        accion_venta_precio, accion_venta_cantidad, accion_venta_nombre = __portafolio_accion_cantidad_precio(id_accion, acciones_portafolio)
 
        
        
 
-        __resumen_venta(id_accion, cantidad, accion_venta_cantidad, saldo_usuario, accion_venta_precio)
-""" 
-        cantidad = __validacion_venta_cantidad(cantidad, data_accion.cantidad_acciones, acciones_portafolio_precio)
+        __resumen_venta(accion_venta_nombre, cantidad, accion_venta_cantidad, saldo_usuario, accion_venta_precio)
+        cantidad = __validacion_venta_cantidad(cantidad, accion_venta_cantidad, accion_venta_precio)
 
         continuar_vendiendo = __confirmar('vender')
 
         if continuar_vendiendo:
             pass
- """
+
 
 
 """ 
