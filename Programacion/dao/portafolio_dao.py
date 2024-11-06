@@ -15,15 +15,19 @@ class PortafolioDAO(DataAccessDAO):
         try:
             result = self.sql_query.get_all(query, (id,))
             if result:
-                portafolio = Portafolio(
-                    id_usuario=result[1],
-                    id_accion=result[2],
-                    cantidad_acciones=result[3],
-                    valor_comprometido=result[4],
-                    rendimiento_operacion=result[5],
-                    id_portafolio=result[0]
-                )
-                return portafolio
+                portafolios = []
+                for item in result:
+                    portafolio = Portafolio(
+                        id_usuario=item[1],
+                        id_accion=item[2],
+                        cantidad_acciones=item[3],
+                        valor_comprometido=item[4],
+                        rendimiento_operacion=item[5],
+                        id_portafolio=item[0]
+                    )
+                    portafolios.append(portafolio)
+                   
+                return portafolios
             else:
                 return None
         except Exception as e:
