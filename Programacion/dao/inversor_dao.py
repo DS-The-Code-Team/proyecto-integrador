@@ -1,7 +1,8 @@
 from dao.interface_dao import DataAccessDAO
 from models.inversor import Inversor
 from utils.db_conn import DBConn
-import logging
+
+from utils.loggin_colors import log_error, log_info, log_warning
 
 class InversorDAO(DataAccessDAO):
     def __init__(self):
@@ -31,9 +32,9 @@ class InversorDAO(DataAccessDAO):
                 data = (inversor.nombre, inversor.apellido, inversor.cuil, inversor.correo, inversor.contrasena, inversor.pin, inversor.saldo)
                 cursor.execute(query, data)
                 connection.commit()
-                logging.info(f"Inversor {inversor.nombre} {inversor.apellido} registrado con éxito.")
+                log_info(f"Inversor {inversor.nombre} {inversor.apellido} registrado con éxito.")
         except Exception as e:
-            logging.error(f"Error al registrar inversor: {e}")
+            log_error(f"Error al registrar inversor: {e}")
         finally:
             cursor.close() 
            
@@ -69,7 +70,7 @@ class InversorDAO(DataAccessDAO):
                 ]
                 return inversores
         except Exception as e:
-            logging.error(f"Error al listar inversores: {e}")
+           log_error(f"Error al listar inversores: {e}")
         finally:
             cursor.close()
             
@@ -90,9 +91,9 @@ class InversorDAO(DataAccessDAO):
                 """
                 cursor.execute(query, (data,))
                 connection.commit()
-                logging.info(f"Datos actualizados")
+                log_info(f"Datos actualizados")
         except Exception as e:
-            logging.error(f"Error al intentar actualizar los datos: {e}")
+            log_error(f"Error al intentar actualizar los datos: {e}")
         finally:
             cursor.close() 
 
@@ -104,9 +105,9 @@ class InversorDAO(DataAccessDAO):
                 query = f"DELETE FROM {self.db_conn.get_database_name()}.usuarios WHERE id_usuario = %s"
                 cursor.execute(query, (inversor.id_usuario,))
                 connection.commit()
-                logging.info(f"Inversor {inversor.nombre} {inversor.apellido} eliminado con éxito.")
+                log_info(f"Inversor {inversor.nombre} {inversor.apellido} eliminado con éxito.")
         except Exception as e:
-            logging.error(f"Error al intentar iniciar sesión: {e}")
+            log_error(f"Error al intentar iniciar sesión: {e}")
             return None
         finally:
             cursor.close() 
@@ -121,16 +122,17 @@ class InversorDAO(DataAccessDAO):
                 query = f"SELECT id_usuario, nombre, apellido, cuil, correo, contrasena, pin, saldo, fecha_registro FROM {self.db_conn.get_database_name()}.usuarios WHERE correo = %s AND contrasena = %s"
                 cursor.execute(query, (correo, contrasena))
                 result = cursor.fetchone()
-                print(result)
+
                 if result:
                     inversor = self._map_result_to_inversor(result)
-                    logging.info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
+                    log_info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
+
                     return inversor
                 else:
-                    logging.warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
+                    log_warning(f"Intento de inicio de sesión fallido para el correo: {correo}")
                     return None
         except Exception as e:
-            logging.error(f"Error al intentar iniciar sesión: {e}")
+            log_error(f"Error al intentar iniciar sesión: {e}")
             return None
         finally:
             cursor.close() 
@@ -149,7 +151,9 @@ class InversorDAO(DataAccessDAO):
                     return False
                 return True
         except Exception as e:
-            logging.error(f"Error al verificar el usuario: {e}")
+            log_error(f"Error al verificar el usuario: {e}")
+            return False
+
         finally:
             cursor.close() 
 
@@ -161,9 +165,9 @@ class InversorDAO(DataAccessDAO):
                 query = f"UPDATE {self.db_conn.get_database_name()}.usuarios SET contrasena = %s WHERE correo = %s"
                 cursor.execute(query, (contrasena_nueva, correo))
                 connection.commit()
-                logging.info(f"Contraseña de {correo} actualizada con éxito.")
+                log_info(f"Contraseña de {correo} actualizada con éxito.")
         except Exception as e:
-            logging.error(f"Error al intentar actualizar la contraseña: {e}")
+          log_error(f"Error al intentar actualizar la contraseña: {e}")
 
         finally:
             cursor.close() 
