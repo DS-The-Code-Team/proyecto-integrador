@@ -1,8 +1,5 @@
-import time
-import logging
-logging.basicConfig(level=logging.INFO)
+from utils.loggin_colors import log_info
 
 def terminar_programa_view():
-    logging.info("Saliendo...")
-    time.sleep(1)
+    log_info("Programa cerrado con éxito")
     quit()

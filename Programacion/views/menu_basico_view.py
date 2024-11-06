@@ -21,7 +21,8 @@ def menu_basico_view(menu_titulo, menu_options):
         print(f"{key}: {value[0]}")
     print("")
 
-    while True:
+    opcion = None
+    while opcion not in menu_options:
         opcion = input("Ingrese una opción: ").strip()
         if opcion.isdigit():
             break
@@ -36,6 +37,3 @@ def menu_basico_view(menu_titulo, menu_options):
         
     else:
         log_warning(msg_error)
-
-
-        
