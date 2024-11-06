@@ -97,4 +97,4 @@ JOIN acciones a ON p.id_accion = a.id_accion;
 SELECT u.nombre, u.apellido, SUM(t.total_operacion) AS rendimiento_total 
 FROM usuarios u 
 JOIN transacciones t ON u.id_usuario = t.id_usuario 
-GROUP BY u.id_usuario;
+GROUP BY u.id_usuario;

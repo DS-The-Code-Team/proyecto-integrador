@@ -10,7 +10,7 @@ class InversorDAO(DataAccessDAO):
         self.db_conn = db_conn or DBConn()
         self.sql_query = sql_query or Sql_Query(self.db_conn)
 
-    def _map_result_to_inversor(self, result):
+    def __map_result_to_inversor(self, result):
         return Inversor(
                         id_usuario=result[0],
                         nombre=result[1],
@@ -48,7 +48,7 @@ class InversorDAO(DataAccessDAO):
             FROM {self.db_conn.get_database_name()}.usuarios
         """
         results = self.sql_query.get_all(query)
-        return [self._map_result_to_inversor(result) for result in results] if results else []
+        return [self.__map_result_to_inversor(result) for result in results] if results else []
 
             
 
@@ -89,7 +89,7 @@ class InversorDAO(DataAccessDAO):
         try:
             result = self.sql_query.get_one(query, data)
             if result:
-                inversor = self._map_result_to_inversor(result)
+                inversor = self.__map_result_to_inversor(result)
                 log_info(f"Inversor {inversor.nombre} {inversor.apellido} ha iniciado sesión con éxito.")
                 return inversor
             else:
@@ -121,3 +121,14 @@ class InversorDAO(DataAccessDAO):
             log_info(f"Contraseña de {correo} actualizada con éxito.")
         except Exception as e:
           log_error(f"Error al intentar actualizar la contraseña: {e}")
+
+    
+    def get_saldo(self, id_usuario):
+        query = f"SELECT saldo FROM {self.db_conn.get_database_name()}.usuarios WHERE id_usuario = %s"
+        data = (id_usuario,)
+        try:
+            saldo = self.sql_query.get_one(query, data)
+            return saldo[0] if saldo else None
+        except Exception as e:
+            log_error(f"Error al obtener el saldo: {e}")
+            return None

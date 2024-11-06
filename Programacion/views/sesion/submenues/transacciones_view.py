@@ -1,16 +1,32 @@
 from views.menu_basico_view import menu_basico_view
 from models.transaccion import Transaccion
 from dao.accion_dao import AccionDAO
+from dao.inversor_dao import InversorDAO
 from dao.transaccion_dao import TransaccionDAO
 import os 
 
-def comprar_acciones_view():
-    while True:
-        continuar = input("¿Desea comprar acciones? (s para continuar, n para volver atrás): ")
-        if continuar.lower() != 's':
+def confirmar():
+    respuesta = True
+    while respuesta:
+        continuar = input(f"\n¿Desea continuar? (no para volver, si para continuar): ")
+        if continuar.lower() == 'no':
             print("Volviendo al menú anterior...")
+            respuesta = False
             return
+        elif continuar.lower() == 'si':
+            print("")
+            respuesta = False
+            
+def actualizar_saldo():
+    dao_inversor = InversorDAO()
+    saldo_usuario = dao_inversor.get_saldo(os.getenv('id_inversor'))
+    os.environ['saldo_inversor'] = str(saldo_usuario)
 
+
+def comprar_acciones_view():
+    continue_buying = True
+    while continue_buying:
+        
         id_usuario = os.getenv('id_inversor')
         saldo_usuario = os.getenv('saldo_inversor')
 
@@ -22,13 +38,10 @@ def comprar_acciones_view():
             return
         
         print("Acciones disponibles:")
-        for id_accion, nombre_accion, precio_compra in acciones:
-            print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: {precio_compra}")
+        for id_accion, nombre_accion, precio_compra, cantidad_mercado in acciones:
+            print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: {precio_compra}, cantidad en mercado: {cantidad_mercado}")
 
-        volver_atras = input("¿Desea volver atrás? (s para volver, cualquier otra tecla para continuar): ")
-        if volver_atras.lower() == 's':
-            print("Volviendo al menú anterior...")
-            return
+        confirmar()
 
         id_accion = input("Ingrese el ID de la acción que desea comprar: ")
         cantidad = int(input("Ingrese la cantidad de acciones que desea comprar: "))
@@ -37,13 +50,12 @@ def comprar_acciones_view():
         exito_compra = transacciones_dao.comprar_accion(id_usuario, id_accion, cantidad)
 
         if exito_compra:
+            actualizar_saldo()
             print(f"Compra realizada con éxito.\n Su saldo actual es ${saldo_usuario}")
         else:
             print("Error en la compra. Verifique su saldo o datos.")
         
-        volver_atras = input("¿Desea seguir comprando? (s/n): ")
-        if volver_atras.lower() != 's':
-            break
+        confirmar()
 
 def vender_acciones_view():
     while True:

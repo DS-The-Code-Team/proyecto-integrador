@@ -1,50 +1,41 @@
 from dao.interface_dao import DataAccessDAO
 from models.accion import Accion
 from utils.db_conn import DBConn
-import logging
+
+from utils.loggin_colors import log_error, log_info, log_warning
+from utils.sql_query import Sql_Query
+
 
 class AccionDAO(DataAccessDAO):
-    def __init__(self):
-        self.db_conn = DBConn()
-        self.connection = self.db_conn.connect_to_mysql()
+    def __init__(self, db_conn=None, sql_query=None):
+        self.db_conn = db_conn or DBConn()
+        self.sql_query = sql_query or Sql_Query(self.db_conn)
     
     def get(self, id):
+        query = "SELECT * FROM acciones WHERE id_accion = %s"
+                
         try:
-            with DBConn() as connection:
-                cursor = connection.cursor()
-                query = "SELECT * FROM acciones WHERE id_accion = %s"
-                cursor.execute(query, (id,))
-                result = cursor.fetchone()
-                if result:
-                    accion = Accion(*result)
-                    return accion
-                else:
-                    return None
+            result = self.sql_query.get(query, (id,))
+        
+            if result:
+                accion = Accion(*result)
+                return accion
+            else:
+                return None
         except Exception as e:
-            logging.error(f"Error al buscar la acción n° {id}: {e}")
+            log_error(f"Error al buscar la acción n° {id}: {e}")
             return None
-        finally:
-            if cursor:
-                cursor.close()
-
+        
     
     def get_all(self):
+        query = "SELECT * FROM acciones"
         try:
-            with DBConn() as connection:  
-                cursor = connection.cursor()
-                query = "SELECT * FROM acciones"
-                cursor.execute(query)
-                results = cursor.fetchall()
-                acciones = [Accion(*result) for result in results] 
-                return acciones
+            results = self.sql_query.get_all(query)
+            acciones = [Accion(*result) for result in results] 
+            return acciones
         except Exception as e:
-            logging.error(f"Error al buscar las acciones: {e}")
+            log_error(f"Error al buscar las acciones: {e}")
             return None
-        finally:
-            if cursor:
-                cursor.close()
-
-
 
  
     def create(self, object):
@@ -60,33 +51,29 @@ class AccionDAO(DataAccessDAO):
     
 
     def get_precios_de_acciones(self):
-        cursor = None  
-        try:
-            with DBConn() as connection:
-                cursor = connection.cursor()  
-                cursor.execute(""" 
-                    SELECT a.id_accion, a.nombre_accion, c.precio_compra
+        query = """  SELECT a.id_accion, a.nombre_accion, c.precio_compra, a.cantidad_mercado
                     FROM acciones a
-                    JOIN cotizacion c ON a.id_cotizacion = c.id_cotizacion
-                """)
-                return cursor.fetchall()  
+                    JOIN cotizacion c ON a.id_cotizacion = c.id_cotizacion """
+        try:
+            data_acciones = self.sql_query.get_all(query)
+            return data_acciones  
         except Exception as e:
-            logging.error(f"Error al obtener precios de acciones: {e}")
+            log_error(f"Error al obtener precios de acciones: {e}")
             return []
-        finally:
-            if cursor: 
-                cursor.close()
-
+        
     
     def get_acciones_portafolio(self, id_usuario):
-        with DBConn() as connection:
-            with connection.cursor() as cursor:
-                cursor.execute("""
+        query = """
                     SELECT a.id_accion, a.nombre_accion, p.cantidad_acciones 
                     FROM portafolio p 
                     JOIN acciones a ON p.id_accion = a.id_accion 
                     WHERE p.id_usuario = %s
-                """, (id_usuario,))
-                return cursor.fetchall()  
+                """
+        try:
+            data_acciones = self.sql_query.get_all(query, (id_usuario,))
+            return data_acciones  
+        except Exception as e:
+            log_error(f"Error al obtener acciones: {e}")
+            return []
 
         
