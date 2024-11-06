@@ -64,7 +64,7 @@ class AccionDAO(DataAccessDAO):
     
     def get_acciones_portafolio(self, id_usuario):
         query = """
-                    SELECT a.id_accion, a.nombre_accion, p.cantidad_acciones 
+                    SELECT a.id_accion, a.nombre_accion, p.cantidad_acciones, p.valor_comprometido, p.rendimiento_operacion 
                     FROM portafolio p 
                     JOIN acciones a ON p.id_accion = a.id_accion 
                     WHERE p.id_usuario = %s

@@ -6,10 +6,16 @@ from dao.transaccion_dao import TransaccionDAO
 from utils.loggin_colors import log_info, log_error, log_warning
 import os
 
-def __confirmar():
-    continuar = input(f"\n¿Desea continuar? (no para volver, si para continuar): ").lower().strip()
+def __iniciar_transaccion():
+    id_usuario = os.getenv('id_inversor')
+    saldo_usuario = os.getenv('saldo_inversor')
+    accion_dao = AccionDAO()
+    return id_usuario, saldo_usuario, accion_dao
+
+def __confirmar(operacion):
+    continuar = input(f"\n¿Desea {operacion}? (no para volver, si para continuar): ").lower().strip()
     if continuar == 'no':
-        print("Volviendo al menú anterior...")
+        print(f"Volviendo al menú anterior...\n")
         return False
     elif continuar == 'si':
         print("")
@@ -42,13 +48,17 @@ def __validacion_saldo(operacion, precio, cantidad):
             return True
         
 
-def __validacion_input_numero(msj, maximo=1000):
+def __validacion_input_numero(msj,array=None):
     while True:
             try:
                 numero = int(input(msj))
-                if numero <= 0 or numero > maximo:
-                    print("Por favor, ingrese un número valido.")
-                    continue
+                if array:
+                    control = []
+                    for id in array:
+                        control.append(id[0])
+                    if numero not in control:
+                        print("Por favor, ingrese un número válido.")
+                        continue
                 if isinstance(numero, int):
                     return numero
             except ValueError:
@@ -67,6 +77,14 @@ def __validacion_compra_cantidad(cantidad, data_accion):
         print(f"Costo total: ${cantidad * data_accion.precio_historico}")
         return cantidad
 
+
+def __validacion_venta_cantidad(cantidad, acciones_portafolio, acciones_portafolio_precio):
+    while cantidad > acciones_portafolio:
+        log_warning("No hay suficientes acciones en el portafolio.")
+        cantidad = int(input("Ingrese la cantidad de acciones que desea vender: "))
+    if cantidad < acciones_portafolio:    
+        print(f"Costo total: ${cantidad * acciones_portafolio_precio}")
+        return cantidad
 
 
 def __validacion_venta(cantidad, data_accion):
@@ -91,10 +109,8 @@ def comprar_acciones_view():
     continuar_comprando = True
     while continuar_comprando:
         
-        id_usuario = os.getenv('id_inversor')
-        saldo_usuario = os.getenv('saldo_inversor')
-
-        accion_dao = AccionDAO()
+        id_usuario, saldo_usuario, accion_dao =  __iniciar_transaccion()
+        
         acciones = accion_dao.get_precios_de_acciones()
 
         if not acciones:
@@ -105,9 +121,9 @@ def comprar_acciones_view():
         for id_accion, nombre_accion, precio_compra, cantidad_mercado in acciones:
             print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: ${precio_compra}, cantidad en mercado: {cantidad_mercado}")
         print("")
-        
-        id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea comprar: ",int(acciones[-1][0]))
-        cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea comprar: ")
+      
+        id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea comprar: ", acciones)
+        cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea comprar: " )
         
         precio_compra = __accion_seleccionada_precio(id_accion, acciones)
 
@@ -121,7 +137,7 @@ def comprar_acciones_view():
 
         if saldo_suficiente:
                 
-            continuar_comprando = __confirmar()
+            continuar_comprando = __confirmar('comprar')
 
             if continuar_comprando:
                 transacciones_dao = TransaccionDAO()
@@ -145,26 +161,29 @@ def vender_acciones_view():
     continuar_vendiendo = True
     while continuar_vendiendo:
 
-        id_usuario = os.getenv('id_inversor')
-        saldo_usuario = os.getenv('saldo_inversor')
-
-        accion_dao = AccionDAO()
+        id_usuario, saldo_usuario, accion_dao =  __iniciar_transaccion()
+        
         acciones_portafolio = accion_dao.get_acciones_portafolio(id_usuario)
+
+        for e in acciones_portafolio:
+            print("control;",e)
 
         if not acciones_portafolio:
             print("No tienes acciones para vender.")
             return
         
         print("Acciones disponibles en su portafolio:")
-        for id_accion, nombre_accion, cantidad_acciones in acciones_portafolio:
-            print(f"ID: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}")
-        print("")
+        for id_accion, nombre_accion, cantidad_acciones, valor_comprometido, rendimiento_operacion in acciones_portafolio:
+            print(f"ID accion: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}, Valor comprometido: ${valor_comprometido}, Rendimiento de las operaciones: {rendimiento_operacion}") 
+        print("") 
+          
+        id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea vender: ",acciones_portafolio)
+        cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea vender: ")
 
-        
-        id_accion = input("Ingrese el ID de la acción que desea vender: ")
-        cantidad = int(input("Ingrese la cantidad de acciones que desea vender: "))
+
+
         """ 
---------------------------------------------------------------- ACA DEJE --------------------------------------- """
+       
         data_portafolio = accion_dao.get_accion_portafolio(id_usuario)
 
         print(data_portafolio.cantidad_acciones)
@@ -180,7 +199,7 @@ def vender_acciones_view():
         volver_atras = input("¿Desea seguir vendiendo? (s/n): ")
         if volver_atras.lower() != 's':
             break
-
+ """
 def transacciones_historial():
     print("Historial de transacciones")
 
