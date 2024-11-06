@@ -27,14 +27,12 @@ def __confirmar(operacion):
 
 def __accion_seleccionada_precio(id_accion, acciones):
     position = id_accion - 1
-    log_info(f"acción elegida, {acciones[position]}")
     accion = acciones[position]
     return accion[2]
 
 
 def __portafolio_accion_cantidad_precio(id_accion, acciones):
     position = id_accion - 1
-    log_info(f"acción elegida, {acciones[position]}")
     accion = acciones[position]
     seleccionado_precio = accion[3]
     seleccionado_cantidad = accion[2]
@@ -186,16 +184,13 @@ def vender_acciones_view():
         
         acciones_portafolio = accion_dao.get_acciones_portafolio(id_usuario)
 
-        for e in acciones_portafolio:
-            print("control;",e)
-
         if not acciones_portafolio:
             print("No tienes acciones para vender.")
             return
         
         print("Acciones disponibles en su portafolio:")
         for id_accion, nombre_accion, cantidad_acciones, valor_comprometido, rendimiento_operacion in acciones_portafolio:
-            print(f"Nro. accion: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}, Valor comprometido: ${valor_comprometido}, Rendimiento de las operaciones: {rendimiento_operacion}") 
+            print(f"Nro. accion: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}, Valor comprometido: ${valor_comprometido}") 
         print("") 
           
         id_accion = __validacion_input_numero("Ingrese el número de la acción que desea vender: ",acciones_portafolio)
@@ -232,24 +227,6 @@ def vender_acciones_view():
             break
 
 
-""" 
-       
-        data_portafolio = accion_dao.get_accion_portafolio(id_usuario)
-
-        print(data_portafolio.cantidad_acciones)
-        __confirmar()
-        transacciones_dao = TransaccionDAO()
-        exito_venta = transacciones_dao.vender_accion(id_usuario, id_accion, cantidad)
-
-        if exito_venta:
-            print(f"Venta realizada con éxito.\n Su saldo actual es ${saldo_usuario}")
-        else:
-            print("Error en la venta. Verifique sus datos o la cantidad de acciones a vender.")
-        
-        volver_atras = input("¿Desea seguir vendiendo? (s/n): ")
-        if volver_atras.lower() != 's':
-            break
- """
 def transacciones_historial():
     print("Historial de transacciones")
 
