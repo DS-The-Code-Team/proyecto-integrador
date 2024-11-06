@@ -114,11 +114,13 @@ def vender_acciones_view():
         print("Acciones disponibles en su portafolio:")
         for id_accion, nombre_accion, cantidad_acciones in acciones_portafolio:
             print(f"ID: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}")
+        print("")
 
         
         id_accion = input("Ingrese el ID de la acción que desea vender: ")
         cantidad = int(input("Ingrese la cantidad de acciones que desea vender: "))
 
+--------------------------------------------------------------- ACA DEJE ---------------------------------------
         data_portafolio = accion_dao.get_accion_portafolio(id_usuario)
 
         print(data_portafolio.cantidad_acciones)
