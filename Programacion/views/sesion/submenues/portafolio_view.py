@@ -20,12 +20,12 @@ def get_portafolio(id_usuario):
 
 def portafolio_view():
     id_usuario = int(os.getenv("id_inversor"))
-    print(f"Mostrando portafolio del usuario con id: {id_usuario}")
 
     portafolio = get_portafolio(id_usuario)
     if portafolio:
         for item in portafolio:
-            print(f"Acción número: {item.id_accion}, Cantidad de acciones: {item.cantidad_acciones}, Valor comprometido: {item.valor_comprometido}, Rendimiento de las operaciones: {item.rendimiento_operacion}")
+            print(f"Acción número: {item.id_accion}, Cantidad: {item.cantidad_acciones}, Valor comprometido: {item.valor_comprometido}, Rendimiento de las operaciones: {item.rendimiento_operacion}")
+        print("")
     else:
         portafolio = crear_portafolio()       
         portafolio = get_portafolio(id_usuario)
