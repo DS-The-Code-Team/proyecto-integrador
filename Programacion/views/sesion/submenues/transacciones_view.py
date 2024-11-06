@@ -211,11 +211,25 @@ def vender_acciones_view():
         __resumen_venta(accion_venta_nombre, cantidad, accion_venta_cantidad, saldo_usuario, accion_venta_precio)
         cantidad = __validacion_venta_cantidad(cantidad, accion_venta_cantidad, accion_venta_precio)
 
+            
         continuar_vendiendo = __confirmar('vender')
 
         if continuar_vendiendo:
-            pass
+            transacciones_dao = TransaccionDAO()
+            exito_venta = transacciones_dao.vender_accion(id_usuario, id_accion, cantidad)
 
+            if exito_venta:
+                __actualizar_saldo()
+              
+                print(f"Venta realizada con éxito.\nSu saldo actual es ${saldo_usuario}\n")
+                break
+            else:
+                log_error("Error en la venta. Verifique sus datos o la cantidad de acciones a vender.")
+                break
+        
+        else:
+            print(f"Venta cancelada.\n")
+            break
 
 
 """ 
