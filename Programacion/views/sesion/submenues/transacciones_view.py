@@ -3,29 +3,59 @@ from models.transaccion import Transaccion
 from dao.accion_dao import AccionDAO
 from dao.inversor_dao import InversorDAO
 from dao.transaccion_dao import TransaccionDAO
-import os 
+import os
 
-def confirmar():
-    respuesta = True
-    while respuesta:
-        continuar = input(f"\n¿Desea continuar? (no para volver, si para continuar): ")
-        if continuar.lower() == 'no':
-            print("Volviendo al menú anterior...")
-            respuesta = False
-            return
-        elif continuar.lower() == 'si':
-            print("")
-            respuesta = False
-            
-def actualizar_saldo():
+def __confirmar():
+    continuar = input(f"\n¿Desea continuar? (no para volver, si para continuar): ").lower().strip()
+    if continuar == 'no':
+        print("Volviendo al menú anterior...")
+        return False
+    elif continuar == 'si':
+        print("")
+        return True
+    else:
+        print("Opción inválida.")
+        return __confirmar()
+        
+
+def __actualizar_saldo():
     dao_inversor = InversorDAO()
     saldo_usuario = dao_inversor.get_saldo(os.getenv('id_inversor'))
     os.environ['saldo_inversor'] = str(saldo_usuario)
 
 
+def __actualizar_acciones_mercado(dao_accion, id_accion, cantidad_mercado):
+    dao_accion.update_accion(id_accion, cantidad_mercado)
+
+
+def __validacion_compra(cantidad, data_accion):
+    while cantidad > data_accion.cantidad_mercado:
+        print("No hay suficientes acciones en el mercado.")
+        cantidad = int(input("Ingrese la cantidad de acciones que desea comprar: "))
+    if cantidad < data_accion.cantidad_mercado:    
+        print(f"Costo total: ${cantidad * data_accion.precio_historico}")
+        return cantidad
+
+def __validacion_venta(cantidad, data_accion):
+    while cantidad > data_accion.cantidad_acciones:
+        print("No tienes suficientes acciones para vender.")
+        cantidad = int(input("Ingrese la cantidad de acciones que desea vender: "))
+    if cantidad < data_accion.cantidad_acciones:    
+        return cantidad
+
+def __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario):
+    print(f"""
+            Acción seleccionada: {id_accion}
+            Cantidad seleccionada: {cantidad}
+            Cantidad disponible: {data_accion.cantidad_mercado}
+            Costo unitario: ${data_accion.precio_historico}
+            Costo total: ${cantidad * data_accion.precio_historico} 
+            Saldo actual: ${saldo_usuario}
+        """)
+
 def comprar_acciones_view():
-    continue_buying = True
-    while continue_buying:
+    continuar_comprando = True
+    while continuar_comprando:
         
         id_usuario = os.getenv('id_inversor')
         saldo_usuario = os.getenv('saldo_inversor')
@@ -37,32 +67,39 @@ def comprar_acciones_view():
             print("No hay acciones para comprar")
             return
         
+
         print("Acciones disponibles:")
         for id_accion, nombre_accion, precio_compra, cantidad_mercado in acciones:
             print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: {precio_compra}, cantidad en mercado: {cantidad_mercado}")
-
-        confirmar()
+        print("")
 
         id_accion = input("Ingrese el ID de la acción que desea comprar: ")
         cantidad = int(input("Ingrese la cantidad de acciones que desea comprar: "))
 
-        transacciones_dao = TransaccionDAO()
-        exito_compra = transacciones_dao.comprar_accion(id_usuario, id_accion, cantidad)
-
-        if exito_compra:
-            actualizar_saldo()
-            print(f"Compra realizada con éxito.\n Su saldo actual es ${saldo_usuario}")
-        else:
-            print("Error en la compra. Verifique su saldo o datos.")
+        data_accion = accion_dao.get(id_accion)
         
-        confirmar()
+        __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario)
+
+        cantidad = __validacion_compra(cantidad, data_accion)
+        continuar_comprando = __confirmar()
+
+        if continuar_comprando:
+            transacciones_dao = TransaccionDAO()
+            exito_compra = transacciones_dao.comprar_accion(id_usuario, id_accion, cantidad)
+
+            if exito_compra:
+                __actualizar_saldo()
+                __actualizar_acciones_mercado(accion_dao, id_accion, data_accion.cantidad_mercado - cantidad)
+                print(f"Compra realizada con éxito.\n Su saldo actual es ${saldo_usuario}")
+                break
+            else:
+                print("Error en la compra. Verifique su saldo o datos.")
+                break
+
 
 def vender_acciones_view():
-    while True:
-        continuar = input("¿Desea vender acciones? (s para continuar, n para volver atrás): ")
-        if continuar.lower() != 's':
-            print("Volviendo al menú anterior...")
-            return
+    continuar_vendiendo = True
+    while continuar_vendiendo:
 
         id_usuario = os.getenv('id_inversor')
         saldo_usuario = os.getenv('saldo_inversor')
@@ -78,14 +115,14 @@ def vender_acciones_view():
         for id_accion, nombre_accion, cantidad_acciones in acciones_portafolio:
             print(f"ID: {id_accion}, Nombre: {nombre_accion}, Cantidad: {cantidad_acciones}")
 
-        volver_atras = input("¿Desea volver atrás? (s para volver, cualquier otra tecla para continuar): ")
-        if volver_atras.lower() == 's':
-            print("Volviendo al menú anterior...")
-            return    
-
+        
         id_accion = input("Ingrese el ID de la acción que desea vender: ")
         cantidad = int(input("Ingrese la cantidad de acciones que desea vender: "))
 
+        data_portafolio = accion_dao.get_accion_portafolio(id_usuario)
+
+        print(data_portafolio.cantidad_acciones)
+        __confirmar()
         transacciones_dao = TransaccionDAO()
         exito_venta = transacciones_dao.vender_accion(id_usuario, id_accion, cantidad)
 

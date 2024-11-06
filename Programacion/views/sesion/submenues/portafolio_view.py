@@ -20,6 +20,7 @@ def get_portafolio(id_usuario):
 
 def portafolio_view():
     id_usuario = int(os.getenv("id_inversor"))
+    print(f"Mostrando portafolio del usuario con id: {id_usuario}")
 
     portafolio = get_portafolio(id_usuario)
     if portafolio:

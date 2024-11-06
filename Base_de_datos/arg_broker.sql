@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS acciones
     id_cotizacion INT, 
     nombre_accion VARCHAR (100) NOT NULL, 
     precio_historico DECIMAL (15,2) NOT NULL,
+    cantidad_mercado INT NOT NULL,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (id_empresa) REFERENCES empresas (id_empresa),
     FOREIGN KEY (id_cotizacion) REFERENCES cotizacion (id_cotizacion)

@@ -15,7 +15,7 @@ class AccionDAO(DataAccessDAO):
         query = "SELECT * FROM acciones WHERE id_accion = %s"
                 
         try:
-            result = self.sql_query.get(query, (id,))
+            result = self.sql_query.get_one(query, (id,))
         
             if result:
                 accion = Accion(*result)
@@ -75,5 +75,15 @@ class AccionDAO(DataAccessDAO):
         except Exception as e:
             log_error(f"Error al obtener acciones: {e}")
             return []
-
+        
+    
+    def update_accion(self, id_accion, cantidad_mercado):
+        query = "UPDATE acciones SET cantidad_mercado = %s WHERE id_accion = %s"
+        try:
+            self.sql_query.execute(query, (cantidad_mercado, id_accion))
+            log_info(f"Acción {id_accion} actualizada con éxito.")
+        except Exception as e:
+            log_error(f"Error al actualizar acción: {e}")
+            return False
+        return True
         

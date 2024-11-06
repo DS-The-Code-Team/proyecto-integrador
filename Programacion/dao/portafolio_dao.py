@@ -13,7 +13,7 @@ class PortafolioDAO(DataAccessDAO):
     def get(self, id):
         query = "SELECT * FROM portafolio WHERE id_usuario = %s"
         try:
-            result = self.sql_query.get(query, (id,))
+            result = self.sql_query.get_all(query, (id,))
             if result:
                 portafolio = Portafolio(
                     id_usuario=result[1],

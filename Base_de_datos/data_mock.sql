@@ -35,18 +35,18 @@ INSERT INTO cotizacion (id_cotizacion, precio_compra, precio_venta, fecha_cotiza
 ('9', '223.82', '213.82', '2024-10-25 11:10:45'),
 ('10', '7765.99', '7754.82', '2024-10-25 11:10:45');
 
-INSERT INTO acciones (id_accion, id_empresa, id_cotizacion, nombre_accion, precio_historico, fecha_actualizacion)
+INSERT INTO acciones (id_accion, id_empresa, id_cotizacion, nombre_accion, precio_historico, fecha_actualizacion, cantidad_mercado)
 VALUES 
-('1' ,'1' ,'1' ,'Accion_Arcor', 800.00, '2024-10-20 11:11:59'),
-('2' ,'2' ,'2' ,'Accion_Google', 900.00, '2024-10-20 11:11:59'),
-('3' ,'3' ,'3' ,'Accion_Meta', 11000.00, '2024-10-20 11:11:59'),
-('4' ,'4' ,'4' ,'Accion_BancoMacro', 28000.00, '2024-10-20 11:11:59'),
-('5' ,'5' ,'5' ,'Accion_LibertadSRL', 5600.00, '2024-10-20 11:11:59'),
-('6' ,'6' ,'6' ,'Accion_GrupoFinancieroGalicia', 10400.00, '2024-10-20 11:11:59'),
-('7' ,'7' ,'7' ,'Accion_Metrogas', 9200.00, '2024-10-20 11:11:59'),
-('8' ,'8' ,'8' ,'Accion_TelecomArgentina', 67600.00, '2024-10-20 11:11:59'),
-('9' ,'9' ,'9' ,'Accion_YPF', 200.00, '2024-10-20 11:11:59'),
-('10' ,'10' ,'10' ,'Accion_GrupoSuperville', 7700.00, '2024-10-20 11:11:59');
+('1' ,'1' ,'1' ,'Accion_Arcor', 800.00, '2024-10-20 11:11:59',10),
+('2' ,'2' ,'2' ,'Accion_Google', 900.00, '2024-10-20 11:11:59',23),
+('3' ,'3' ,'3' ,'Accion_Meta', 11000.00, '2024-10-20 11:11:59',65),
+('4' ,'4' ,'4' ,'Accion_BancoMacro', 28000.00, '2024-10-20 11:11:59',87),
+('5' ,'5' ,'5' ,'Accion_LibertadSRL', 5600.00, '2024-10-20 11:11:59',34),
+('6' ,'6' ,'6' ,'Accion_GrupoFinancieroGalicia', 10400.00, '2024-10-20 11:11:59',84),
+('7' ,'7' ,'7' ,'Accion_Metrogas', 9200.00, '2024-10-20 11:11:59',12),
+('8' ,'8' ,'8' ,'Accion_TelecomArgentina', 67600.00, '2024-10-20 11:11:59',65),
+('9' ,'9' ,'9' ,'Accion_YPF', 200.00, '2024-10-20 11:11:59',43),
+('10' ,'10' ,'10' ,'Accion_GrupoSuperville', 7700.00, '2024-10-20 11:11:59',76);
 
 INSERT INTO transacciones (id_transaccion, id_usuario, id_accion, id_cotizacion, tipo_operacion, cantidad, precio_unitario, total_operacion, broker_comision, fecha_transaccion)
 VALUES
