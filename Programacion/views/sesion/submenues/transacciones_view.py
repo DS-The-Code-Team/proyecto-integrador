@@ -30,6 +30,16 @@ def __accion_seleccionada_precio(id_accion, acciones):
     log_info(f"acción elegida, {acciones[position]}")
     accion = acciones[position]
     return accion[2]
+
+
+def __portafolio_accion_cantidad_precio(id_accion, acciones):
+    position = id_accion - 1
+    log_info(f"acción elegida, {acciones[position]}")
+    accion = acciones[position]
+    seleccionado_precio = accion[3]
+    seleccionado_cantidad = accion[2]
+    return seleccionado_precio, seleccionado_cantidad
+
             
 
 def __actualizar_saldo():
@@ -102,6 +112,16 @@ def __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario, preci
             Cantidad disponible: {data_accion.cantidad_mercado}
             Costo unitario: ${precio_compra}
             Costo total: ${cantidad * precio_compra} 
+            Saldo actual: ${saldo_usuario}
+        """)
+    
+def __resumen_venta(id_accion, cantidad, cantidad_acciones, saldo_usuario, precio_venta,):
+    print(f"""
+            Acción seleccionada: {id_accion}
+            Cantidad seleccionada: {cantidad}
+            Cantidad disponible: {cantidad_acciones}
+            Costo unitario: ${precio_venta}
+            Costo total: ${cantidad * precio_venta} 
             Saldo actual: ${saldo_usuario}
         """)
 
@@ -180,9 +200,25 @@ def vender_acciones_view():
         id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea vender: ",acciones_portafolio)
         cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea vender: ")
 
+      
+
+        accion_venta_precio, accion_venta_cantidad = __portafolio_accion_cantidad_precio(id_accion, acciones_portafolio)
+
+       
+       
+
+        __resumen_venta(id_accion, cantidad, accion_venta_cantidad, saldo_usuario, accion_venta_precio)
+""" 
+        cantidad = __validacion_venta_cantidad(cantidad, data_accion.cantidad_acciones, acciones_portafolio_precio)
+
+        continuar_vendiendo = __confirmar('vender')
+
+        if continuar_vendiendo:
+            pass
+ """
 
 
-        """ 
+""" 
        
         data_portafolio = accion_dao.get_accion_portafolio(id_usuario)
 
