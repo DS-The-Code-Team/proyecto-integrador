@@ -3,6 +3,7 @@ from models.transaccion import Transaccion
 from dao.accion_dao import AccionDAO
 from dao.inversor_dao import InversorDAO
 from dao.transaccion_dao import TransaccionDAO
+from utils.loggin_colors import log_info, log_error, log_warning
 import os
 
 def __confirmar():
@@ -16,7 +17,14 @@ def __confirmar():
     else:
         print("Opción inválida.")
         return __confirmar()
-        
+
+
+def __accion_seleccionada_precio(id_accion, acciones):
+    position = id_accion - 1
+    log_info(f"acción elegida, {acciones[position]}")
+    accion = acciones[position]
+    return accion[2]
+            
 
 def __actualizar_saldo():
     dao_inversor = InversorDAO()
@@ -24,17 +32,42 @@ def __actualizar_saldo():
     os.environ['saldo_inversor'] = str(saldo_usuario)
 
 
+def __validacion_saldo(operacion, precio, cantidad):
+    if operacion == 'compra':
+        saldo_usuario = float(os.getenv('saldo_inversor'))
+        if saldo_usuario < (precio * cantidad):
+            log_error("Saldo insuficiente.")
+            return False
+        else:
+            return True
+        
+
+def __validacion_input_numero(msj, maximo=1000):
+    while True:
+            try:
+                numero = int(input(msj))
+                if numero <= 0 or numero > maximo:
+                    print("Por favor, ingrese un número valido.")
+                    continue
+                if isinstance(numero, int):
+                    return numero
+            except ValueError:
+                print("Por favor, ingrese un número válido.")
+                
+
 def __actualizar_acciones_mercado(dao_accion, id_accion, cantidad_mercado):
     dao_accion.update_accion(id_accion, cantidad_mercado)
 
 
-def __validacion_compra(cantidad, data_accion):
+def __validacion_compra_cantidad(cantidad, data_accion):
     while cantidad > data_accion.cantidad_mercado:
-        print("No hay suficientes acciones en el mercado.")
+        log_warning("No hay suficientes acciones en el mercado.")
         cantidad = int(input("Ingrese la cantidad de acciones que desea comprar: "))
     if cantidad < data_accion.cantidad_mercado:    
         print(f"Costo total: ${cantidad * data_accion.precio_historico}")
         return cantidad
+
+
 
 def __validacion_venta(cantidad, data_accion):
     while cantidad > data_accion.cantidad_acciones:
@@ -43,13 +76,14 @@ def __validacion_venta(cantidad, data_accion):
     if cantidad < data_accion.cantidad_acciones:    
         return cantidad
 
-def __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario):
+
+def __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario, precio_compra):
     print(f"""
             Acción seleccionada: {id_accion}
             Cantidad seleccionada: {cantidad}
             Cantidad disponible: {data_accion.cantidad_mercado}
-            Costo unitario: ${data_accion.precio_historico}
-            Costo total: ${cantidad * data_accion.precio_historico} 
+            Costo unitario: ${precio_compra}
+            Costo total: ${cantidad * precio_compra} 
             Saldo actual: ${saldo_usuario}
         """)
 
@@ -65,36 +99,46 @@ def comprar_acciones_view():
 
         if not acciones:
             print("No hay acciones para comprar")
-            return
-        
+            return   
 
         print("Acciones disponibles:")
         for id_accion, nombre_accion, precio_compra, cantidad_mercado in acciones:
-            print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: {precio_compra}, cantidad en mercado: {cantidad_mercado}")
+            print(f"ID: {id_accion}, Nombre: {nombre_accion}, Precio de compra: ${precio_compra}, cantidad en mercado: {cantidad_mercado}")
         print("")
-
-        id_accion = input("Ingrese el ID de la acción que desea comprar: ")
-        cantidad = int(input("Ingrese la cantidad de acciones que desea comprar: "))
+        
+        id_accion = __validacion_input_numero("Ingrese el ID de la acción que desea comprar: ",int(acciones[-1][0]))
+        cantidad = __validacion_input_numero("Ingrese la cantidad de acciones que desea comprar: ")
+        
+        precio_compra = __accion_seleccionada_precio(id_accion, acciones)
 
         data_accion = accion_dao.get(id_accion)
         
-        __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario)
+        __resumen_transaccion(id_accion, cantidad, data_accion, saldo_usuario, precio_compra)
 
-        cantidad = __validacion_compra(cantidad, data_accion)
-        continuar_comprando = __confirmar()
+        cantidad = __validacion_compra_cantidad(cantidad, data_accion)
 
-        if continuar_comprando:
-            transacciones_dao = TransaccionDAO()
-            exito_compra = transacciones_dao.comprar_accion(id_usuario, id_accion, cantidad)
+        saldo_suficiente = __validacion_saldo('compra', precio_compra, cantidad)
 
-            if exito_compra:
-                __actualizar_saldo()
-                __actualizar_acciones_mercado(accion_dao, id_accion, data_accion.cantidad_mercado - cantidad)
-                print(f"Compra realizada con éxito.\n Su saldo actual es ${saldo_usuario}")
-                break
-            else:
-                print("Error en la compra. Verifique su saldo o datos.")
-                break
+        if saldo_suficiente:
+                
+            continuar_comprando = __confirmar()
+
+            if continuar_comprando:
+                transacciones_dao = TransaccionDAO()
+                exito_compra = transacciones_dao.comprar_accion(id_usuario, id_accion, cantidad)
+
+                if exito_compra:
+                    __actualizar_saldo()
+                    __actualizar_acciones_mercado(accion_dao, id_accion, data_accion.cantidad_mercado - cantidad)
+                    print(f"Compra realizada con éxito.\nSu saldo actual es ${saldo_usuario}\n")
+                    break
+                else:
+                    log_error("Error en la compra. Verifique su saldo o datos.")
+                    break
+        
+        else:
+            print(f"Compra cancelada por saldo insuficiente.\n")
+            break
 
 
 def vender_acciones_view():
