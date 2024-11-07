@@ -1,10 +1,11 @@
 from dao.inversor_dao import InversorDAO
 import os
+from utils.input_password import input_password
 
 def login(dao, intentos_maximos):
     for intento in range(intentos_maximos):
             correo = input("Ingrese su correo: ")
-            contrasena = input("Ingrese su contraseña: ")
+            contrasena = input_password("Ingrese su contraseña: ")
             user = dao.get_login(correo, contrasena)
             if user:
                 return user

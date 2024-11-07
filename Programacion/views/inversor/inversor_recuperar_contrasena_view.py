@@ -1,5 +1,7 @@
 from dao.inversor_dao import InversorDAO
 from views.menu_basico_view import menu_basico_view
+from utils.input_password import input_password
+
 
 def recuperar_contrasena():
     dao = InversorDAO()
@@ -8,13 +10,14 @@ def recuperar_contrasena():
     for intento in range(intentos_maximos):
     
         correo = input("Ingrese su correo: ")
-        pin = input("Ingrese su PIN: ")
+        pin = input_password("Ingrese su PIN: ")
         verificacion = dao.get_verificar_usuario(correo, pin)
         
         if verificacion:
             for intento_contrasena in range(intentos_maximos):
-                contrasena_nueva = input("Ingrese la nueva contraseña: ")
-                confirmar_contrasena_nueva = input("Confirme la nueva contraseña: ")
+                
+                contrasena_nueva = input_password("Ingrese la nueva contraseña: ")
+                confirmar_contrasena_nueva = input_password("Confirme la nueva contraseña: ")
                 if contrasena_nueva == confirmar_contrasena_nueva:
                     dao.set_contrasena_nueva(correo, contrasena_nueva)
                     return

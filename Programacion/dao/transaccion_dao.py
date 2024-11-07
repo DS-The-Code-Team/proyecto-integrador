@@ -1,10 +1,14 @@
 from dao.interface_dao import DataAccessDAO
 from utils.db_conn import DBConn
-import logging  
+
+from utils.loggin_colors import log_error, log_info, log_warning
+from utils.sql_query import Sql_Query
+
 
 class TransaccionDAO(DataAccessDAO):
-    def __init__(self):
-        self.db_conn = DBConn() 
+    def __init__(self, db_conn=None, sql_query=None):
+        self.db_conn = db_conn or DBConn()
+        self.sql_query = sql_query or Sql_Query(self.db_conn)
     
     def get(self, id: int):
         pass
@@ -24,6 +28,7 @@ class TransaccionDAO(DataAccessDAO):
     def comprar_accion(self, id_usuario, id_accion, cantidad):
         try:
             with DBConn() as connection:
+                
                 with connection.cursor() as cursor:
                     cursor.execute("SELECT saldo FROM usuarios WHERE id_usuario = %s", (id_usuario,))
                     saldo_actual = cursor.fetchone()
@@ -51,7 +56,7 @@ class TransaccionDAO(DataAccessDAO):
                     costo_total = total_operacion + comision
 
                     if saldo_actual < costo_total:
-                        logging.warning("Saldo insuficiente para hacer la compra.")
+                        log_warning("Saldo insuficiente para hacer la compra.")
                         return False
 
                     query_transaccion = """
@@ -78,11 +83,11 @@ class TransaccionDAO(DataAccessDAO):
                         """, (id_usuario, id_accion, cantidad, costo_total, 0.0))
 
                     connection.commit()
-                    logging.info("Compra de acción realizada con éxito.")
+                    log_info("Compra de acción realizada con éxito.")
                     return True
 
         except Exception as e:
-            logging.error(f"Error al realizar la compra de acción: {e}")
+            log_error(f"Error al realizar la compra de acción: {e}")
             return False
     
     def vender_accion(self, id_usuario, id_accion, cantidad):
@@ -93,12 +98,12 @@ class TransaccionDAO(DataAccessDAO):
                     portafolio_result = cursor.fetchone()
 
                     if portafolio_result is None:
-                        logging.warning("No se encontraron acciones en el portafolio para vender.")
+                        log_warning("No se encontraron acciones en el portafolio para vender.")
                         return False
                     
                     cantidad_actual = portafolio_result[0]
                     if cantidad > cantidad_actual:
-                        logging.warning("No se puede vender más acciones de las que posee.")
+                        log_warning("No se puede vender más acciones de las que posee.")
                         return False
 
                     cursor.execute(""" 
@@ -135,9 +140,9 @@ class TransaccionDAO(DataAccessDAO):
                     cursor.execute("UPDATE usuarios SET saldo = saldo + %s WHERE id_usuario = %s", (ingreso_total, id_usuario))
 
                     connection.commit()
-                    logging.info("Venta de acción realizada con éxito.")
+                    log_info("Venta de acción realizada con éxito.")
                     return True
 
         except Exception as e:
-            logging.error(f"Error al realizar la venta de acción: {e}")
+            log_error(f"Error al realizar la venta de acción: {e}")
             return False

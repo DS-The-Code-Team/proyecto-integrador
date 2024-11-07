@@ -1,5 +1,4 @@
-import logging
-
+from utils.loggin_colors import log_info, log_warning
 """ 
     
     INSTRUCCIONES DE USO
@@ -22,21 +21,19 @@ def menu_basico_view(menu_titulo, menu_options):
         print(f"{key}: {value[0]}")
     print("")
 
-    while True:
+    opcion = None
+    while opcion not in menu_options:
         opcion = input("Ingrese una opción: ").strip()
         if opcion.isdigit():
             break
         else:
-            logging.warning(msg_error)
+            log_warning(msg_error)
 
     if opcion in menu_options:
         descripcion, funcion = menu_options[opcion]
-        logging.info(f"Opción {opcion} seleccionada: {descripcion}")
+        log_info(f"{descripcion}".upper())
         if funcion:
             funcion()
         
     else:
-        logging.warning(msg_error)
-
-
-        
+        log_warning(msg_error)

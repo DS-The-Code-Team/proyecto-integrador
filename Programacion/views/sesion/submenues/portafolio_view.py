@@ -23,14 +23,9 @@ def portafolio_view():
 
     portafolio = get_portafolio(id_usuario)
     if portafolio:
-        print(f"""
-              Portafolio: {portafolio.id_portafolio}
-              Usuario: {portafolio.id_usuario}
-              Acciones: {portafolio.id_accion}
-              Cantidad total: {portafolio.cantidad_acciones}
-              Valor comprometido: {portafolio.valor_comprometido}
-              Rendimiento de las operaciones: {portafolio.rendimiento_operacion}
-        """)
+        for item in portafolio:
+            print(f"Acción número: {item.id_accion}, Cantidad: {item.cantidad_acciones}, Valor comprometido: {item.valor_comprometido}, Rendimiento de las operaciones: {item.rendimiento_operacion}")
+        print("")
     else:
         portafolio = crear_portafolio()       
         portafolio = get_portafolio(id_usuario)
@@ -38,3 +33,4 @@ def portafolio_view():
         Portafolio:{portafolio}
         """)
     
+ 
